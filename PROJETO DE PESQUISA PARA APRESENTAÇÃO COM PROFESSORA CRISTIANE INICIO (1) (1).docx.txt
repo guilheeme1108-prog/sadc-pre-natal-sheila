@@ -1,0 +1,95 @@
+PROJETO DE PESQUISA - mestrado
+Sheila Pinheiro
+TÍTULO
+Desenvolvimento de um Sistema de Apoio à Decisão Clínica (SADC) para a Microgestão do Pré-Natal alinhado ao Programa Saúde Brasil 360
+
+1. INTRODUÇÃO E PROBLEMA
+A Atenção Primária à Saúde (APS) constitui o principal nível de organização do cuidado no Sistema Único de Saúde (SUS), sendo responsável pela coordenação da assistência e pelo acompanhamento longitudinal de populações vulneráveis, com destaque para o ciclo materno-infantil. A qualidade da assistência ofertada nesse nível está diretamente associada à redução da morbimortalidade materna e neonatal, constituindo prioridade absoluta das políticas públicas de saúde e do monitoramento epidemiológico no país.
+No cenário contemporâneo, a gestão e o modelo de financiamento da APS foram profundamente reestruturados por meio do programa Saúde Brasil 360 (ou Atenção Primária Brasil 360). Regulamentado primordialmente pela Portaria GM/MS nº 3.493/2024 e atualizado pelas diretrizes de equidade e vínculo territorial das Portarias complementares GM/MS nº 6.907/2025 e GM/MS nº 7.799/2025, este novo arranjo institucional redefiniu o cofinanciamento federal dos serviços. Os repasses financeiros aos municípios passaram a ser vinculados a quatro eixos: Componente Fixo, Componente de Vínculo, Políticas Estratégicas e, centralmente, o Componente de Qualidade.
+No âmbito do Componente de Qualidade do programa Brasil 360, o monitoramento do desempenho das equipes de Saúde da Família (eSF) passou a ser balizado por indicadores rigorosos de efetividade. Destaca-se, nesse contexto, o indicador Cuidado na Gestação e Puerpério (Nota Metodológica C3). Este indicador avalia o cumprimento de um conjunto de 11 critérios objetivos relacionados às boas práticas assistenciais, que englobam a captação precoce da gestante até a 12ª semana, número mínimo de consultas, registros clínicos de aferição de pressão arterial e antropometria, realização de exames laboratoriais e testes rápidos por trimestre (como Sífilis, HIV e Hepatites), imunização (vacina dTpa a partir da 20ª semana), atendimento em saúde bucal e o acompanhamento integral pós-parto no puerpério. Para que o cuidado de cada gestante pontue positivamente no cálculo de desempenho municipal, o Ministério da Saúde adota um Caderno de Cálculo cumulativo, onde o cumprimento integral dessas ações soma até 100 pontos por ciclo assistencial.
+Contudo, a operacionalização prática desse monitoramento enfrenta barreiras tecnológicas no cotidiano das unidades de saúde. Embora os dados sejam rotineiramente inseridos em sistemas oficiais como o e-SUS APS, a arquitetura dessas plataformas é predominantemente voltada ao registro retrospectivo de informações, com foco em faturamento de produção, financiamento e auditoria. Conforme ponderado na Nota Técnica Nº 6/2025-DEAPS/SAPS/MS, os resultados finais dos indicadores frequentemente sofrem limitações decorrentes de falhas no registro qualificado e de lapsos temporais no envio das bases de dados locais. Na prática corrente, os sistemas oficiais funcionam como um reflexo tardio da assistência (um "espelho retrovisor"), sendo incapazes de oferecer suporte efetivo à tomada de decisão clínica em tempo oportuno.
+Nesse cenário, identifica-se uma lacuna tecnológica e assistencial crítica: as equipes de saúde carecem de ferramentas digitais que realizem a microgestão do cuidado, ou seja, que permitam monitorar, de forma contínua, individualizada e preditiva, o cumprimento das janelas assistenciais de cada gestante cadastrada no território. Sem um suporte que guie a conduta do profissional durante o ato da consulta, falhas invisíveis de registro e de assistência acumulam-se ao longo dos trimestres gestacionais. Essa desconexão favorece a ocorrência de lacunas no cuidado e resulta no descumprimento das metas de qualidade, gerando perdas orçamentárias de cofinanciamento para o município no modelo Brasil 360.
+Dessa forma, evidencia-se o problema que norteia esta investigação: Como qualificar o monitoramento e a aplicação das boas práticas do indicador C3 no cotidiano da Atenção Primária, mitigando falhas assistenciais e de registro no momento do atendimento? Diante do exposto, emerge a necessidade de desenvolvimento de ferramentas digitais de suporte que transformem dados em informação acionável. Propõe-se, assim, o desenvolvimento e validação de um Sistema de Apoio à Decisão Clínica (SADC) de baixo código (low-code), estruturado a partir de um formulário de coleta rápida em tempo de consulta integrado a um dashboard de visualização semafórica, apoiando ativamente a organização do processo de trabalho e a tomada de decisão clínica oportuna na APS
+2. JUSTIFICATIVA E RELEVÂNCIA
+A relevância do presente estudo e sua aplicabilidade prática no Sistema Único de Saúde (SUS) fundamentam-se em três dimensões interconectadas:
+2.1 Dimensão Epidemiológica
+O acompanhamento qualificado da gestação e do puerpério constitui uma janela crítica de oportunidade para promover a saúde integral e mitigar desfechos desfavoráveis. A literatura científica corrobora que a captação oportuna da gestante até a 12ª semana , associada ao cumprimento rigoroso de um pacote estruturado de intervenções pré-natais (consultas regulares, exames de triagem, monitoramento pressórico e imunização adequada), possui impacto direto e mensurável na redução das taxas de morbimortalidade materna e neonatal, alinhando-se às prioridades absolutas das políticas públicas de saúde e aos Direitos Reprodutivos no Brasil. 
+2.2 Dimensão de Gestão e Organização do Trabalho Clínico
+Sob a égide do programa Saúde Brasil 360, instituído pela Portaria GM/MS nº 3.493/2024, o financiamento federal da APS passou a penalizar financeiramente os municípios que não atingem as metas estipuladas no Componente de Qualidade. Embora a Nota Metodológica C3 estabeleça 11 critérios objetivos para avaliar a excelência desse cuidado, sua operacionalização e monitoramento no cotidiano das equipes de Saúde da Família (eSF) e de Atenção Primária (eAP) ainda ocorrem de forma fragmentada e reativa. A ausência de mecanismos de monitoramento contínuo impede a identificação de falhas assistenciais invisíveis ao longo dos trimestres gestacionais, gerando barreiras no processo de trabalho e comprometendo a sustentabilidade fiscal e assistencial do município. 
+2.3 Dimensão de Inovação Tecnológica em Saúde Digital
+O projeto propõe a transposição de um instrumento normativo e avaliativo complexo em um artefato digital de suporte ativo à prática clínica na APS. Ao desenvolver um sistema de baixo código (low-code) que integra a coleta de dados ágil no momento da consulta a um dashboard com lógica semafórica, o estudo reduz de forma expressiva a sobrecarga cognitiva dos profissionais de saúde. A tecnologia proposta substitui a busca manual e retrospectiva de pendências em prontuários por alertas visuais instantâneos baseados nas cores oficiais do programa (Verde, Amarelo e Vermelho), ampliando a capacidade de intervenção clínica e busca ativa em tempo oportuno.
+3. ESTADO DA ARTE
+O avanço da Saúde Digital, impulsionado pelo advento da Saúde 4.0, consolidou o uso de dados em tempo real como um pilar indispensável para a melhoria contínua da qualidade e segurança do paciente nos sistemas de saúde. No cenário brasileiro, a evolução dos modelos de financiamento e indução de práticas na APS reforça a centralidade dos indicadores de desempenho como métricas de avaliação do acesso e da resolutividade dos serviços de saúde. 
+Contudo, a análise da literatura científica nacional e dos sistemas de informação vigentes revela uma assimetria no desenvolvimento de soluções tecnológicas para o SUS. Plataformas oficiais consolidadas, tais como o Sistema de Informação para a Atenção Primária à Saúde (SIAPS/SISAB) e o e-Gestor Atenção Básica, bem como a maioria das ferramentas privadas de Business Intelligence disponíveis no mercado, concentram-se predominantemente na macrogestão. Essas ferramentas operam por meio da análise agregada e retrospectiva de dados populacionais, gerando relatórios quadrimestrais voltados para subsidiar decisões de gestores municipais, estaduais e auditores federais. 
+Em contrapartida, constata-se uma escassez crítica de artefatos digitais voltados à microgestão do cuidado, ou seja, ferramentas de suporte desenhadas para atuar diretamente no nível individual e territorial, apoiando o enfermeiro, o médico e o Agente Comunitário de Saúde (ACS) no exato momento da assistência. Os sistemas prontuários eletrônicos atuais (como o e-SUS APS PEC) funcionam de forma passiva, exigindo que o profissional investigue ativamente aba por aba do histórico da paciente para identificar se há exames pendentes ou vacinas em atraso, o que frequentemente resulta em falhas de registro e perda de janelas terapêuticas adequadas. 
+Nesse hiato tecnológico e assistencial, esta pesquisa se posiciona na interface entre a Ciência da Computação Aplicada e a Prática Assistencial de Saúde na APS. O projeto diferencia-se das soluções existentes ao propor um Sistema de Apoio à Decisão Clínica (SADC) focado na utilização prática, diária e intuitiva dos parâmetros da Nota C3. Ao transmutar regras de cálculo retrospectivas em gatilhos preditivos acionados por cliques rápidos durante o ato da consulta, a ferramenta preenche uma lacuna da literatura, convertendo o ato burocrático do registro em um instrumento dinâmico de vigilância em saúde e salvaguarda materno-infantil
+4. OBJETIVOS
+4.1 Objetivo Geral
+Desenvolver e validar um Sistema de Apoio à Decisão Clínica (SADC), composto por um formulário de coleta em tempo de consulta e um dashboard semafórico, fundamentado nas diretrizes e no caderno de cálculo do indicador C3 do programa Saúde Brasil 360, voltado para a microgestão do cuidado pré-natal na Atenção Primária à Saúde. 
+4.2 Objetivos Específicos
+Mapear e traduzir os 11 critérios de boas práticas e as regras de pontuação da Nota Metodológica C3 do Ministério da Saúde em algoritmos lógicos e automatizados para suporte à decisão. 
+Construir o protótipo funcional do SADC utilizando ferramentas de baixo código (low-code), integrando uma interface de cliques rápidos para o momento da consulta (coleta) a um painel visual semafórico (monitoramento).
+Validar o conteúdo e o fluxo clínico do sistema por meio de um comitê de juízes especialistas (enfermeiros obstetras, médicos e gestores da APS).
+Avaliar a usabilidade e a aplicabilidade da ferramenta no processo de trabalho por meio do teste com enfermeiros assistenciais, utilizando a escala System Usability Scale (SUS).
+5. METODOLOGIA
+5.1 Tipo de Estudo
+Este trabalho consiste em uma pesquisa de desenvolvimento tecnológico aplicada à saúde. O objetivo é criar uma ferramenta digital prática, implantá-la diretamente na rotina assistencial e avaliar, junto aos profissionais que a utilizaram, se ela é correta clinicamente e fácil de usar no cotidiano da Atenção Primária à Saúde (APS).
+5.2 Cenário do Estudo
+O planejamento, a montagem matemática e a construção do sistema acontecerão em ambiente acadêmico. A etapa de implantação prática e avaliação de campo ocorrerá diretamente nas Unidades Básicas de Saúde da Família (UBSF) do município, junto aos médicos e enfermeiros que realizam as consultas de pré-natal e puerpério.
+5.3 Etapas do Estudo
+O projeto será realizado em duas etapas consecutivas, conforme o fluxo abaixo:
+Etapa 1: Modelagem e Desenvolvimento do Artefato (SADC)
+Nesta fase inicial, as regras oficiais de pontuação da Nota Metodológica C3 do Ministério da Saúde serão transformadas em um sistema digital de baixo código (low-code), dividido em três partes integradas:
+Formulário de Cliques Rápidos (Momento da Consulta): Criação de um formulário eletrônico (usando a plataforma Google Forms ou Microsoft Forms). Durante o atendimento, o profissional levará poucos segundos para clicar em caixas de seleção (checkboxes) confirmando quais das 11 boas práticas foram feitas ou checadas na consulta do dia.
+Cérebro Matemático (A Planilha): Os dados clicados vão automaticamente para uma planilha eletrônica (Google Sheets ou Excel) que calculará o tempo de gravidez (Idade Gestacional) baseado na Data da Última Menstruação (DUM) e somará os pontos da gestante (de 0 a 100) seguindo a regra oficial do programa Saúde Brasil 360.
+Painel Visual (Dashboard Semafórico): A planilha enviará os resultados para uma tela visual (Looker Studio ou Power BI). Essa tela mostrará a lista de gestantes da unidade usando as cores oficiais do governo para alertar o profissional: Verde (cuidado em dia), Amarelo (prazo se aproximando) e Vermelho (pendência crítica, como vacina dTpa atrasada).
+Etapa 2: Implantação e Avaliação de Campo por Médicos e Enfermeiros
+Após a criação do protótipo e a devida aprovação ética, a ferramenta será implantada diretamente no cenário real do SUS. O sistema será disponibilizado para uso de médicos e enfermeiros assistenciais atuantes nas equipes de Saúde da Família do município durante sua rotina diária de atendimentos pré-natais.
+Após o período de utilização da ferramenta no cotidiano das consultas com suas gestantes reais, esses mesmos profissionais aplicarão duas avaliações sobre a experiência:
+Avaliação de Conteúdo Clínico: Os médicos e enfermeiros analisarão se as perguntas do formulário, as regras de prazos e os alertas das cores estavam clinicamente corretos e adequados para a tomada de decisão no pré-natal. Suas respostas serão analisadas pelo Índice de Validação de Conteúdo (IVC), considerando-se a ferramenta aprovada se obtiver mais de 80% de concordância positiva (IVC 0,80).
+Avaliação de Usabilidade (Facilidade de Uso): No mesmo momento, para medir se o sistema é rápido e amigável, os profissionais responderão ao questionário da Escala SUS (System Usability Scale), composto por 10 perguntas focadas na facilidade de uso do software. O sistema será considerado viável para o cotidiano do SUS se atingir uma nota média superior a 68 pontos.
+6. ASPECTOS ÉTICOS
+Por contar com a participação de seres humanos (os médicos e enfermeiros que testarão e avaliarão o sistema na prática), o projeto será enviado para análise e aprovação do Comitê de Ética em Pesquisa (CEP), respeitando a Resolução nº 466/2012 do Conselho Nacional de Saúde. Todos os profissionais participantes assinarão o Termo de Consentimento Livre e Esclarecido (TCLE), e o anonimato de todos os envolvidos, bem como o sigilo dos dados das gestantes, será rigorosamente protegido.
+7. DESCRIÇÃO DO PRODUTO TÉCNICO E TECNOLÓGICO (PTT)
+O produto final desta pesquisa consiste em um Sistema de Apoio à Decisão Clínica (SADC) voltado para a microgestão do pré-natal, enquadrado na tipologia de Software/Plataforma de Monitoramento de Dados de Saúde (conforme as diretrizes da CAPES). A estrutura e as características funcionais do produto estão divididas nos seguintes pilares assistenciais e de gestão:
+7.1 Justificativa e Demanda do Serviço: A ferramenta responde à necessidade de monitorar ativamente as janelas assistenciais da gestante em tempo real no consultório. Ela soluciona o atraso dos sistemas oficiais tradicionais (como o e-SUS APS), impedindo falhas invisíveis de registro e a consequente perda de metas e repasses financeiros do Componente de Qualidade do programa Saúde Brasil 360.
+7.2 Processo de Desenvolvimento e Funcionalidades (Baixo Código): O sistema é concebido sob o modelo de baixo código (low-code), utilizando ferramentas institucionais acessíveis e integradas em três etapas:
+Alimentação Dinâmica e Ágil: Interface de formulário eletrônico (Google Forms ou Microsoft Forms) configurada como um checklist de segurança rápido, desenhado para preenchimento pelo médico ou enfermeiro em menos de 30 segundos durante a consulta real.
+Automatização de Parâmetros Clínicos: Mecanismo de planilha inteligente (Google Sheets ou Excel) com cálculo automatizado que processa a Idade Gestacional a partir da Data da Última Menstruação (DUM) e valida o cumprimento acumulado das metas de exames físicos, laboratoriais e vacinas exigidas pelo governo federal.
+Painel de Vigilância Semafórica: Interface visual interativa (Looker Studio ou Power BI) que reflete em tempo real o desempenho do acompanhamento (gerando uma pontuação de 0 a 100 pontos baseada no indicador oficial). O painel emite alertas preventivos coloridos com as cores oficiais do programa Saúde Brasil 360 para avisar a equipe quais exames ou vacinas estão perto do prazo limite, permitindo realizar buscas ativas e intervenções oportunas antes do fechamento do quadrimestre.
+7.3 Mecanismo de Validação: O produto será implantado diretamente na rotina do serviço e avaliado simultaneamente pelos profissionais da ponta (médicos e enfermeiros) após o uso clínico. Serão aplicados o Índice de Validação de Conteúdo (IVC 0,80) para a parte técnica e a Escala SUS (score > 68) para medir a facilidade de uso e clareza da interface.
+7.4 Transferibilidade: Por utilizar ferramentas de baixo custo e alta acessibilidade, o modelo lógico deste SADC pode ser facilmente copiado, adaptado e replicado por qualquer outro município ou equipe de Saúde da Família do Brasil que utilize as diretrizes do programa Saúde Brasil 360.
+
+8. INOVAÇÃO E IMPACTO NA SAÚDE COLETIVA
+A inovação deste projeto reside na conversão de um instrumento puramente normativo, avaliativo e de auditoria retrospectiva (a Nota Técnica C3) em um mecanismo ativo de vigilância e segurança do paciente obstétrico à beira do leito (no momento da consulta).
+Diferentemente das plataformas de macrogestão vigentes no SUS (como o SISAB e o e-Gestor Atenção Básica) que geram relatórios consolidados tardios apenas para secretários e auditores, o SADC proposto empodera os profissionais da ponta (médicos e enfermeiros), oferecendo uma interface visual de semáforo que antecipa as necessidades clínicas da gestante antes do encerramento das janelas de oportunidade terapêutica.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+REFERÊNCIAS BIBLIOGRÁFICAS
+
+BRASIL. Ministério da Saúde.Nota Metodológica C3 – Cuidado na Gestação e Puerpério na Atenção Primária à Saúde (APS). Brasília, DF: Ministério da Saúde, 2025/2026.
+BRASIL. Ministério da Saúde.Portaria nº 161, de 2024. Dispõe sobre as regras de financiamento e indicadores de desempenho da Atenção Primária à Saúde. Brasília, DF: Ministério da Saúde, 2024.
+BRASIL. Ministério da Saúde.Atenção ao pré-natal de baixo risco. Cadernos de Atenção Básica, nº 32. Brasília, DF: Ministério da Saúde, 2013.
+ BRASIL. Ministério da Saúde.e-SUS Atenção Primária à Saúde (e-SUS APS): Manual do Sistema com Coleta de Dados Simplificada. Brasília, DF: Ministério da Saúde, 2021.
+CHAVES, A. C. C. et al.Monitoramento e avaliação de indicadores na Atenção Primária à Saúde. Revista de Saúde Pública, 2025.
+STARFIELD, Barbara.Atenção Primária: equilíbrio entre necessidades de saúde, serviços e tecnologia. Brasília: UNESCO, 2002.
+

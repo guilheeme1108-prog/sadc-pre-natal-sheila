@@ -1,0 +1,33 @@
+O pensamento é o fluxo exato de um Sistema de Apoio à Decisão Clínica (SADC). 
+ O  coração do problema: para o dashboard funcionar lá na frente, o enfermeiro ou médico precisa alimentar o sistema durante o atendimento, de forma rápida, sem perder tempo. 
+Uma  solução é criar um Formulário Eletrônico integrado a uma Planilha Inteligente.
+Veja como esse fluxo funciona na prática :
+O Fluxo do seu Projeto: Do Clique ao Dashboard
+[Momento da Consulta]              [Bastidores]                    [Visualização]
+  Formulário Rápido       --->   Planilha Eletrônica     --->   Dashboard Semafórico
+(Enfermeiro clica no              (Armazena os dados e           (Gera os alertas e a
+ que foi feito hoje)              calcula a pontuação)           pontuação de 0 a 100)
+Passo 1: O que o profissional usa na consulta (A Coleta)
+No momento em que a gestante entra no consultório, o enfermeiro não vai abrir um sistema lento. Ele vai abrir um formulário simples (como o Google Forms ou o Microsoft Forms), que pode ficar salvo nos favoritos do computador ou até em um tablet/celular.
+Esse formulário terá os dados de identificação da gestante (Nome/CPF) e caixas de seleção (as famosas checkboxes) com as 11 boas práticas da Nota C3. 
+O profissional apenas clica no que aplicou hoje:
+[ ] Primeira consulta antes da 12ª semana? 
+[ ] Aferiu a Pressão Arterial nesta consulta? 
+[ ] Registrou Peso e Altura simultâneos hoje? 
+[ ] Solicitou/Avaliou os exames do 1º trimestre? 
+[ ] Prescreveu/Verificou a vacina dTpa? 
+Ele clica em "Enviar". Esse processo leva menos de 30 segundos.
+Passo 2: Onde o dado cai (O Cérebro)
+Assim que o profissional clica em "Enviar", os dados caem automaticamente em uma planilha (como o Google Sheets ou Excel).
+É aqui que entra a  programação dessa planilha com fórmulas simples para fazer duas coisas baseadas no documento oficial que você enviou:
+Contar os registros acumulados: A planilha vai somando as consultas, aferições de PA e registros de peso/altura ao longo do tempo (lembrando que a meta são 7 de cada). 
+Calcular a Pontuação (0 a 100): Cada clique que o enfermeiro deu no formulário vai somando os pontos oficiais da Nota C3 (10 pontos para captação precoce, 9 pontos para vacina, 9 pontos para exames, etc.). 
+Passo 3: O Resultado Visual (O Dashboard)
+A planilha envia os dados mastigados para o Looker Studio ou Power BI (que são ferramentas visuais gratuitas).
+Lá, o dashboard gera aquela tela colorida que conversamos antes. Quando o enfermeiro abre o painel geral da unidade de manhã, ele vê o nome de todas as gestantes e uma barra de progresso: "Gestante Maria da Silva: 46 de 100 pontos atingidos. Alerta: Pendente Vacina dTpa (Luz Vermelha)". 
+Por que isso torna projeto genial e viável?
+Usa ferramentas que já existem: o formulário no Google Forms, o banco de dados no Google Sheets e o painel no Looker Studio. Tudo gratuito, seguro e integrado. Pode ser em execel.
+Foco na Microgestão: O e-SUS é para o governo auditar. O seu instrumento é para o enfermeiro clicar na hora da consulta e ver o resultado clínico imediatamente. 
+Fácil de testar: Na sua etapa de testes, você pode pedir para 5 ou 10 enfermeiros simularem consultas usando o seu formulário e depois perguntar a eles (via escala SUS de usabilidade) se foi fácil de clicar e usar. 
+Isso clareia a forma como o  produto vai funcionar? Consegue visualizar os profissionais clicando nesse formulário rápido durante o atendimento?
+

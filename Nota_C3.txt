@@ -1,0 +1,554 @@
+Minis tério da Saúde
+Secr etaria de A tenção Primária à Saúde
+Depart amen to de Es tratégias e P olític as de Saúde Comunit ária
+Coor denaç ão-Ger al de Saúde da F amília e Comunidade
+  
+NOTA METODOLÓGICA C3 - CUIDADO NA GESTAÇÃO E PUERPÉRIO
+1. INDICADOR
+1.1. Cuidado na Ges tação e Puerpério na A tenção Primária à Saúde (APS).
+2. OBJETIV O
+2.1. Tem como obje tivo avaliar o acesso e monit oramen to efetivo durante a gestação e puerpério , com incen tivo à
+captação pr ecoce e ac ompanhamen to coordenado e c ontínuo na APS.
+3. FICHA DE QU ALIFICA ÇÃO
+N Título Descrição
+Contextualização do indicador
+1Título resumido Cuidado na Gestação e Puerpério.
+2Título completo Cuidado na Gestação e Puerpério na Atenção Primária à Saúde (APS).
+3Palavras-chave Gestante; Puérpera; Cuidado pré-natal; Gestação; Puerpério; Atenção Primária à Saúde.
+4Contextualização do
+indicadorMonitoramento da atenção integral e do cuidado longitudinal na gestação e puerpério na
+aplicação de boas práticas de cuidado na APS, considerando as evidências e diretrizes clínicas
+pertinentes.
+5Conceitos
+importantesCaptação precoce: início do pré-natal até a 12ª semana de gestação. Data da Última
+Menstruação (DUM): parâmetro utilizado para cálculo da idade gestacional. Data provável do
+parto (DPP): data prevista para o nascimento do bebê. Puerpério: período que ocorre logo após
+o parto e vai até 42 (quarenta e dois) dias.
+6ObjetivoAvaliar o acesso e acompanhamento efetivo das gestantes e puérperas em relação aos episódios
+de cuidados necessários, com incentivo a captação precoce, acompanhamento coordenado e
+contínuo na APS.
+7Uso/aplicabilidadePermitir que proﬁssionais de saúde e gestores acompanhem a evolução das boas práticas, com o
+intuito de monitorar as ações de promoção da saúde, prevenção de agravos, o manejo, a
+captação, o acesso, o acolhimento e o acompanhamento na gestação e puerpério na APS.
+Regularidade do Indicador
+8Periodicidade da
+atualizaçãoMensal.
+9Periodicidade do
+monitoramentoMensal.
+10Periodicidade da
+avaliaçãoQuadrimestral.
+11Dia de extração dos
+dadosSIAPS: 20º dia útil de cada mês.
+SCNES: A última competência válida.
+Escopo da base de dados de acompanhamento
+12Evento · Consulta por proﬁssional médica(o) ou enfermeira(o).
+ · Registro de aferição de pressão arterial.
+ · Registro de realização de testes rápidos ou exames avaliados.
+ · Registro de peso e altura para avaliação antropométrica.
+ · Visita domiciliar de ACS/TACS.
+ · Registro de vacinação de dTPa.
+ · Registro de consulta odontológica.
+13Período de
+acompanhamentoMensal.
+14Entrada no
+acompanhamentoGestante vinculada às equipes de Saúde da Família (eSF) ou Atenção Primária (eAP), conforme
+regras da Portaria SAPS/MS nº 161/2024.
+N Título Descrição
+15Interrupção do
+acompanhamento · Usuárias(os) que a atualização mais recente do cadastro individual possua a opção “Saída do
+cidadão do cadastro” com a opção “Mudança de território” marcada.
+ · Mudança de equipe, considerando critérios de desempate previstos na Portaria SAPS/MS nº
+161/2024.
+ · Aborto (CID-10/CIAP-2).
+ · Óbito no CADSUS.
+16Boas práticas de
+acompanhamento/
+cuidado(A) Ter a 1ª consulta presencial ou remota realizada por médica(o) ou enfermeira(o), até a 12ª
+semana de gestação.
+(B) Ter pelo menos 07 (sete) consultas presenciais ou remotas realizadas por médica(o) ou
+enfermeira(o) durante o período da gestação.
+(C) Ter pelo menos 07 (sete) registro de aferição de pressão arterial realizados durante o
+período da gestação.
+(D) Ter pelo menos 07 (sete) registros simultâneos de peso e altura durante o período da
+gestação.
+(E) Ter pelo menos 03 (três) visitas domiciliares realizadas por ACS/TACS, após a primeira
+consulta do pré-natal.
+(F) Ter vacina acelular contra difteria, tétano, coqueluche (dTpa) registrada a partir da 20ª
+semana de cada gestação.
+(G) Ter registro dos testes rápidos ou dos exames avaliados para síﬁlis, HIV e hepatites B e C
+realizados no 1º trimestre de cada gestação.
+(H) Ter registro dos testes rápidos ou dos exames avaliados para síﬁlis e HIV realizados no 3º
+trimestre de cada gestação.
+(I) Ter pelo menos 01 (um) registro de consulta presencial ou remota realizada por médica(o) ou
+enfermeira(o) durante o puerpério.
+(J) Ter pelo menos 01 (uma) visita domiciliar realizada por ACS/TACS durante o puerpério.
+(K) Ter pelo menos 01 (uma) atividade em saúde bucal realizada por cirurgiã(ão) dentista ou
+técnica(o) de saúde bucal durante o período da gestação.
+17Datas relevantes · Data da Última Menstruação (DUM).
+ · Data Provável do Parto (DPP).
+ · Idade Gestacional.
+ · Primeira consulta do pré-natal.
+Atenção! O encerramento de cada gestação no sistema irá considerar o total de 294 dias de
+gestação, o que corresponde a 42 semanas. E, para cada puerpério, será considerado no sistema
+o total de 42 dias após o término da gestação.
+Procedimentos para o desenvolvimento do indicador
+18Unidade de medidaPercentual.
+19Descritivo da
+Unidade de Medida%
+20Status do indicadorAcumulativo: Não.
+21Granularidade Identiﬁcador Nacional de Equipe (INE).
+22Polaridade Maior-melhor.
+23Fórmula de CálculoNumerador:
+Somatório das boas práticas pontuadas para a pessoa gestante e puérpera, durante cada
+gestação.
+Denominador:
+Nº total de gestantes e puérperas vinculadas à equipe no período.
+24Método de cálculoI. Regras gerais:
+a) Identiﬁcação da pessoa assistida:
+ · Nome, data de nascimento, Cartão Nacional de Saúde (CNS) ou Cadastro de Pessoa Física
+(CPF) válido por pessoa, em conformidade com o Cadastro Nacional de Saúde (CadSUS).
+b) Validação das equipes:
+ · Serão consideradas equipes de Saúde da Família (eSF), e equipes de Atenção Primária (eAP),
+tipo 70 e 76, respectivamente, atendendo as condições previstas na Portaria GM/MS nº
+3.493/2024.
+ · As boas práticas (E) e (J) não serão condicionantes de pontuação para eAP, tipo 76, atendendo
+as condições previstas na PRC GM/MS nº 02/2017.
+c) Grupos de CBO utilizados para todas as consultas de atendimento individual, presencial ou
+remoto:
+ · 2235 - Enfermeiros
+ · 2231 / 2251 / 2252 / 2253 - Médicos
+d) Grupos de CBO utilizados para todos os procedimentos listados, com exceção do
+03.01.01.025-0 (teleconsulta na APS):
+ · 2235 - Enfermeiros
+N Título Descrição
+ · 2231 / 2251 / 2252 / 2253 - Médicos
+ · 2232 - Cirurgiões-dentistas
+ · 2234 - Farmacêuticos
+ · 2236 - Fisioterapeutas
+ · 2238 - Fonoaudiólogos
+ · 2237 - Nutricionistas
+ · 2241 - Proﬁssionais de Educação Física
+ · 3222 - Técnico de enfermagem e auxiliar de enfermagem
+ · 2239 - Terapeutas ocupacionais, ortopedistas e psicomotricistas.
+ · 5151-05 - Agente Comunitário de Saúde
+ · 3222-55 - Técnico em Agente Comunitário de Saúde
+e) Modelos de Informação da Estratégia eSUS APS:
+Serão considerados os seguintes modelos de informação:
+ · Modelo de Informação de Atendimento Individual (MIAI): considera o Atendimento Individual
+(presencial, domiciliar e remoto) com identiﬁcação do tipo de demanda, desde que registrado
+por proﬁssionais de saúde dos CBO supracitados, com CNS proﬁssional identiﬁcado.
+ · Modelo de Informação de Procedimentos (MIP): considera os procedimentos realizados
+conforme a tabela do Sistema de Gerenciamento da Tabela de Procedimentos, Medicamentos e
+OPM do SUS (SIGTAP), desde que registrado por proﬁssionais de saúde dos CBO supracitados,
+com CNS proﬁssional identiﬁcado.
+ · Modelo de informação de Visita Domiciliar e Territorial (MIVDT): considera o registro de
+visitas domiciliares, com preenchimento do ‘‘motivo da visita’’, desde que registrado por
+ACS/TACS, com CNS proﬁssional identiﬁcado.
+ · Modelo de informação de Vacinação (MIV): considera o registro da aplicação dos imunizantes,
+com identiﬁcação do imunobiológico e dados da estratégia, dose, lote e fabricante, desde que
+registrado por proﬁssionais de saúde dos CBO supracitados, com CNS proﬁssional identiﬁcado. 
+ · Modelo de Informação de Atividade Coletiva (MIAC): considera a atividade coletiva realizada
+(quantitativo de pessoas participantes de pelo menos uma atividade coletiva - código 04, 05, 06
+e 07, de forma especíﬁca ou compartilhada), desde que por proﬁssionais de saúde dos CBO
+supracitados, com CNS proﬁssional.
+ · Registro de Imunobiológico Administrado (RIA): considera as informações sobre a aplicação de
+imunobiológicos, como vacinas, e faz parte da Rede Nacional de Dados em Saúde (RNDS) que
+tem como objetivo padronizar o registro e compartilhamento dessas informações, tanto em
+campanhas de vacinação quanto na rotina de imunização.
+ · Modelo de Informação de Atendimento Odontológico Individual (MIAOI): considera o registro
+de Atendimento Odontológico Individual, desde que realizado por proﬁssional de saúde bucal,
+com CNS proﬁssional identiﬁcado.
+f) CID-10 e/ou CIAP-2 ativos considerados para critérios de elegibilidade:
+CID-10 e CIAP-2 para considerar uma gestação:
+ · CIAP-2: W78; W79; W81; W84; W85; e/ou
+ · CID-10: O11, O12.0, O12.1, O12.2, O13, O14.0, O14.1, O14.9, O15.0, O15.1, O15.9, O16,
+O20.0, O20.8, O20.9, O21.0, O21.1, O21.2, O21.8, O21.9, O22.0, O22.1, O22.2, O22.3, O22.4,
+O22.5, O22.8, O22.9, O23.0, O23.1, O23.2, O23.3, O23.4, O23.5, O23.9, O29.9, O30.0, O30.1,
+O30.2, O30.8, O30.9, O31.1, O31.2, O31.8, O32.0, O32.1, O32.2, O32.3, O32.4, O32.5, O32.6,
+O32.8, O32.9, O33.0, O33.1, O33.2, O33.3, O33.4, O33.5, O33.6, O33.7, O33.8, O75.2, O75.3,
+O99.0, O99.1, O99.2, O99.3, O99.4, O24.0, O24.1, O24.2, O24.3, O24.4, O24.9, O25, O26.0,
+O26.1, O26.3, O26.4, O26.5, O26.8, O26.9, O28.0, O28.1, O28.2, O28.3, O28.4, O28.5, O28.8,
+O28.9, O29.0, O29.1, O29.2, O29.3, O29.4, O29.5, O29.6, O29.8, O33.9, O34.0, O34.1, O34.2,
+O34.3, O34.4, O34.5, O34.6, O34.7, O34.8, O34.9, O35.0, O35.1, O35.2, O35.3, O35.4, O35.5,
+O35.6, O35.7, O35.8, O35.9, O36.0, O36.1, O36.2, O36.3, O36.5, O36.6, O36.7, O36.8, O36.9,
+O40, O41.0, O41.1, O41.8, O41.9, O43.0, O43.1, O43.8, O43.9, O44.0, O44.1, O46.0, O46.8,
+O46.9, O47.0, O47.1, O47.9, O48, O99.5, O99.6, O99.7, Z64.0, O10, O12, O14, O15, O20, O21,
+O22, O23, O24, O26, O28, O29, O30, O31, O32, O33, O34, O35, O36, O41, O43, O44, O46, O47,
+O98, Z34, Z35, Z36, Z32.1, Z33, Z34.0, Z34.8, Z34.9, Z35.0, Z35.1, Z35.2, Z35.3, Z35.4, Z35.7,
+Z35.8, Z35.9
+ · Os códigos rápidos ABP de pré-natal devem ser considerados.
+CID-10 e/ou CIAP-2 para puerpério:
+ · CIAP-2: 48; 49; P29; W18; W19; W70; W90; W91; W92; W93; W94; W95; W96; e/ou
+ · CID-10: F53, F53.0, F53.1, F53.8, F53.9, O10, O10.0, O10.1, O10.2, O10.3, O10.4, O10.9, O85,
+O86, O87, O90, O91, O92, O94, O98, O99, M83.0, O15.2, O26.6, O72.2, O72.3, Z39.1,
+Z39.2, O86.0, O86.1, O86.2, O86.3, O86.4, O86.8, O87.0, O87.1, O87.2, O87.3, O87.8, O87.9,
+O90.0, O90.1, O90.2, O90.3, O90.4, O90.5, O90.8, O90.9, O91.0, O91.1, O91.2, O92.0, O92.1,
+O92.2, O92.3, O92.4, O92.5, O92.6, O92.7, O99.8 e Z39.
+ · Os códigos rápidos ABP de puerpério devem ser considerados para os numeradores.
+g) CID-10 e/ou CIAP-2 ativos considerados para critérios de exclusão:
+ · CIAP-2: W82; W83; e/ou
+ · CID-10: O02; O021; O03; O04; O05; O06; Z303.
+N Título Descrição
+h) Código do procedimento (o procedimento só é válido respeitando-se as habilitações de
+CBO previstos na tabela SIGTAP):
+  · 01.01.04.002-4 - Avaliação antropométrica
+  · 01.01.04.008-3 - Medição de peso
+  · 01.01.04.007-5 - Medição de altura
+ · 03.01.10.003-9 - Aferição da pressão arterial
+ · 03.01.01.003-0 - Consulta de proﬁssionais de nível superior na atenção primária (exceto
+médico)
+ · 03.01.01.006-4 - Consulta médica em atenção primária
+ · 03.01.01.011-0 - Consulta pré-natal
+ · 03.01.01.012-9 - Consulta puerperal
+ · 03.01.01.013-7 - Consulta/atendimento domiciliar
+ · 03.01.01.025-0 - Teleconsulta na atenção primária
+ · 02.14.01.004-0 - Teste rápido para detecção de HIV na gestante ou pai/parceiro
+ · 02.14.01.027-9 - teste rápido para detecção de anticorpos anti-HIV em gestante
+ · 02.14.01.005-8 - Teste rápido para detecção de infecção pelo HIV
+ · 02.14.01.007-4 - Teste rápido para síﬁlis
+ · 02.14.01.008-2 - Teste rápido para síﬁlis na gestante ou pai/parceiro
+ · 02.14.01.025-2 - Teste rápido treponêmico (síﬁlis) em gestante
+ · 02.14.01.009-0 - Teste rápido para detecção de hepatite C
+ · 02.14.01.030-9 - Teste rápido para detecção de anticorpos contra o vírus da hepatite C em
+gestante.
+ · 02.14.01.010-4 - Teste rápido para detecção de infecção pelo HBV
+ · 02.14.01.023-6- teste rápido para detecção do antígeno de superfície do vírus da hepatite B -
+HBV (HBSAG) em gestante.
+ · 02.13.01.078-0 - Detecção rápida da carga viral do HIV
+ · 02.13.01.050-0 - Quantiﬁcação da carga viral do HIV (RNA)
+ · 02.02.03.109-8 - Teste treponêmico para detecção de síﬁlis
+ · 02.02.03.111-0 - Teste não treponêmico para detecção de síﬁlis
+ · 02.02.03.117-9 - Teste não treponêmico para detecção de síﬁlis em gestante
+ · 02.02.03.078-4 - Pesquisa de anticorpos IgG e IgM contra o antígeno central do vírus da
+hepatite B (anti-HBC total)
+ · 02.02.03.097-0 - Pesquisa de antígeno de superfície do vírus da hepatite B (HBsAG)
+ · 02.13.01.020-8 - Identiﬁcação do vírus da hepatite B por PCR (quantitativo)
+ · 02.02.03.005-9 - Detecção de RNA do vírus da hepatite C (qualitativo)
+ · 02.02.03.067-9 - Pesquisa de anticorpos contra o vírus da hepatite C (anti-HCV)
+i) Esquema de dose:
+ · 1 dose a cada gestação, a partir da vigésima semana de gestação (Código de vacina a ser
+considerado: 57 - Vacina dTpa adulto).
+25Categorias de
+análiseBrasil, regiões, unidade federativa, municípios, CNES e equipe.
+26Fonte de dados · Sistema de Informação para a Atenção Primária à Saúde (SIAPS).
+ · Sistema de Cadastro Nacional de Estabelecimentos de Saúde (SCNES).
+ · Rede Nacional de Dados em Saúde (RNDS).
+Análise do indicador
+27Interpretação em
+saúdeA gestação e o puerpério são uma janela de oportunidade para promover a saúde e o cuidado
+integral, contribuindo para que tenham uma vida saudável e atinjam seu pleno potencial, tendo
+diversas repercussões positivas neste período. Os dados apresentados pelo indicador serão
+essenciais para a compreensão de como se dá o cuidado integral durante a gestação e puerpério
+na APS, e para subsidiar a tomada de decisões visando induzir o avanço da implementação de
+boas práticas fundamentais para garantia da melhoria contínua da qualidade de vida nos
+territórios.
+28Ano de referência2024.
+29Indicadores
+relacionadosNão se aplica.
+30ParâmetroÓtimo: > 75 e ≤ 100
+Bom: > 50 e ≤ 75
+Suﬁciente: > 25 e ≤ 50
+Regular: ≤ 25
+31Classiﬁcação
+gerencialIndicador de resultado.
+32Classiﬁcação de
+desempenhoIndicador de efetividade.
+N Título Descrição
+Limitações
+33LimitaçõesConsiderando que há necessidade de registro qualiﬁcado da informação em campo especíﬁco, é
+possível que os resultados sejam limitados por diﬁculdades de registro pelos proﬁssionais de
+saúde no prontuário eletrônico, assim como o envio tardio da informação pela gestão local.
+Há possibilidade de lapso temporal na identiﬁcação da ocorrência de óbitos no CadSUS.
+Responsabilidades
+34GerencialCoordenação-Geral de Inovação e Aceleração Digital na APS (CGIAD)
+e-mail: https://webatendimento.saude.gov.br/faq/saps
+Setor: SAPS/MS
+Telefone: (61) 3315- 9018
+35TécnicaCoordenação-Geral de Atenção à Saúde das Mulheres (CGESMU)
+e-mail: dgci@saude.gov.br
+Setor: DGCI/SAPS
+Telefone: (61) 3315-9135 / 8847
+Departamento de Gestão do Cuidado Integral (DGCI)
+e-mail: dgci@saude.gov.br
+Setor: SAPS/MS
+Telefone: (61) 3315-9135 / 8847
+4. CADERNO DE CÁ CULO
+4.1.  Deﬁniç ão de gestante ou puérper a: são consider adas no denominador as pessoas que gestam iden tiﬁcadas
+como ativas e as puérper as ativas na compe tência avaliada. Para a iden tiﬁcação da gestação serão utiliz adas a data da última
+mens truaç ão (DUM) ou a idade gestacional informadas, como referências para o cálculo das 42 semanas máximas de
+gestação. Para o puerpério , será utiliz ada a referência do período máximo de 42 dias após o parto ou data máxima da
+gestação.
+4.2. Para garantir que todos os municípios possam fazer o monit oramen to da sua situaç ão em relação a esses
+indic ador es, acompanhar o progresso e fazer um cálculo preliminar dos seus result ados, serão consider ados os modelos de
+informaç ão public ados previamen te pela Secr etaria de Atenção Primária à Saúde, do Minis tério da Saúde, no âmbit o do e-
+SUS APS, a través do sítio ele trônic o: https://sisap s.saude. gov.br/sistemas/ sisab/docs/modelos/in tro/ .
+4.3. O numer ador é constituído pela soma das boas práticas pontuadas durante o acompanhamen to da pessoa
+durante a gestação e puerpério. A pontuaç ão pode alcançar um valor máximo de 100 pontos, para cada pessoa durante a
+gestação e puerpério no período , conforme Quadr o 01.
+4.4. Atenção: é import ante destacar que para as boas práticas, serão consider ados os registros de qualquer
+proﬁssional habilit ado em es tabelecimen to de saúde da APS, no país.
+ 
+Quadr o 01. Boas pr áticas de cuidado na g estação e puerpério
+Boas Práticas Pontos
+(A)Ter a 1ª consulta presencial ou remota realizada por médica(o) ou enfermeira(o), até a 12ª semana de
+gestação.10
+(B)Ter pelo menos 07 (sete) consultas presenciais ou remotas realizadas por médica(o) ou enfermeira(o) durante
+o período da gestação.9
+(C)Ter pelo menos 07 (sete) registros de aferição de pressão arterial realizadas durante o período da gestação. 9
+(D)Ter pelo menos 07 (sete) registros simultâneos de peso e altura durante o período da gestação. 9
+(E)Ter pelo menos 03 (três) visitas domiciliares realizadas por ACS/TACS, após a primeira consulta do pré-natal. 9
+(F)Ter vacina acelular contra difteria, tétano, coqueluche (dTpa) registrada a partir da 20ª semana de cada
+gestação.9
+(G)Ter registro dos testes rápidos ou dos exames avaliados para síﬁlis, HIV e hepatites B e C realizados no 1º
+trimestre de cada gestação.9
+(H)Ter registro dos testes rápidos ou dos exames avaliados para síﬁlis e HIV realizados no 3º trimestre de cada
+gestação.9
+(I)Ter pelo menos 01 registro de consulta presencial ou remota realizada por médica(o) ou enfermeira(o)
+durante o puerpério.9
+(J)Ter pelo menos 01 visita domiciliar realizada por ACS/TACS durante o puerpério. 9
+(K)Ter pelo menos 01 atividade em saúde bucal realizada por cirurgiã(ão) dentista ou técnica(o) de saúde bucal
+durante o período da gestação.9
+Somatório em pontos 100
+ 
+Quadr o 02. Detalhamen to para composiç ão das boas práticas (A) 1ª consult a presencial ou remot a realiz ada
+por médic a(o) ou enfermeir a(o), até a 12ª semana de gestação, (B) pelo menos 07 (sete) consult as presenciais ou remot as
+realiz adas por médic a(o) ou enfermeir a(o) durante o período da gestação e (I) pelo menos 01 registro de consult a
+presencial ou r emot a realiz ada por médic a(o) ou en fermeir a(o) dur ante o puerpério.
+Condicionante Código/Campo Descrição Observação
+CBO2251, 2252, 2253,
+2231Médicos -
+2235 Enfermeiros -
+Modelo de
+informaçãoRegistro de
+atendimento da
+Estratégia e-SUS APSModelo de Informação de Atendimento Individual,
+desde que registrado por proﬁssionais de saúde dos
+CBO supracitados, com CNS proﬁssional identiﬁcado,
+alocado conforme os códigos das equipes descritos.Registro de
+atendimento com
+especiﬁcação de CID-
+10/CIAP 2.
+ 
+Quadr o 03. Detalhamen to para composiç ão da boa prática (C) pelo menos 07 (sete) registro de aferição de
+pressão art erial r ealiz ados dur ante o período da g estação.
+Condicionante Código/Campo Descrição Observação
+CBO2251, 2252, 2253, 2231 Médicos -
+2235 Enfermeiros -
+3222Técnico de Enfermagem; ou Auxiliar de Enfermagem; ou
+Técnico em Agente Comunitário de Saúde-
+Modelo de
+informaçãoModelo de Informação de
+Atendimento IndividualSerão considerados os registros no campo “pressão
+arterial” (mmHg) especíﬁco do PEC ou código SIGTAP.
+-Modelo de Informação de
+ProcedimentoSerão considerados os registros com os códigos SIGTAP
+especiﬁcados, com exceção do registro de procedimento
+consolidado.
+Modelo de Informação de
+Atividade ColetivaSerão considerados os registros no campo “pressão
+arterial” (mmHg) especíﬁco do PEC ou código SIGTAP.
+Modelo de Informação de
+Visita Domiciliar e TerritorialSerão considerados os registros de pressão arterial no
+campo especíﬁco.
+SIGTAP 03.01.10.003-9 Aferição da pressão arterial -
+ 
+Quadr o 04. Detalhamen to para composiç ão da boa prática (D) pelo menos 07 (sete) registros simult âneos de
+peso e altur a dur ante o período da g estação.
+Condicionante Código/Campo Descrição Observação
+CBO2251, 2252, 2253, 2231 Médicos -
+2235 Enfermeiros -
+3222Técnico de Enfermagem; ou Auxiliar de Enfermagem;
+ou Técnico em Agente Comunitário de Saúde-
+5151-05 Agente Comunitário de Saúde -
+Modelo de
+informaçãoModelo de Informação de
+Atendimento IndividualSerão considerados os registros de Peso e Altura do
+campo especíﬁco do PEC.
+Registros realizados
+no mesmo dia.Modelo de Informação de
+ProcedimentoSerão considerados os registros com os códigos
+SIGTAP especiﬁcados, com exceção do registro de
+procedimento consolidado.
+Modelo de Informação de
+Atividade ColetivaSerão considerados os registros no campo
+“Antropometria” ou o registro de Peso e Altura do
+campo especíﬁco do PEC.
+Modelo de Informação de
+Visita Domiciliar e TerritorialSerão considerados os registros de peso e altura no
+campo especíﬁco.
+SIGTAP01.01.04.002-4 Avaliação antropométrica -
+01.01.04.008-3 Medição de peso -
+01.01.04.007-5 Medição de altura -
+ 
+Quadr o 05. Detalhamen to para composiç ão das boas práticas (E) pelo menos 03 (três) visit as domiciliar es
+realiz adas por ACS/T ACS, após a prime ira consult a do pré-na tal e (J) pelo menos 01 visit a domiciliar realiz ada por ACS/T ACS
+durante o puerpério.
+Condicionante Código/Campo Descrição Observação
+CBO3222-55Técnico em Agente Comunitário de
+Saúde-
+5151-05 Agente Comunitário de Saúde -
+Modelo de
+informaçãoModelo de Informação de Visita Domiciliar e
+TerritorialSerão considerados os registros de visita
+domiciliar.-
+ 
+Quadr o 06. Detalhamen to para composiç ão da boa prática (F) ter vacina acelular contra difteria, tétano,
+coqueluche (dT pa) r egistrada a partir da 20ª semana de c ada g estação.
+Condicionante Código/Campo Descrição Observação
+CBOTodos que submeterem o registro ao SIAPS ou à RNDS. Será considerado
+qualquer registro de proﬁssional habilitado em estabelecimento de saúde
+da APS.-
+Modelo de
+informaçãoModelo de
+Informação de
+VacinaçãoRegistro do código da vacina no campo especíﬁco
+do PEC e correta identiﬁcação da criança, com data
+de nascimento e CPF ou CNS.-
+Registro de
+Imunobiológico
+Administrado (RIA)Registro da vacina ou transcrição. -
+Código Vacina 57 Vacina dTpa adulto -
+ 
+Quadr o 07. Detalhamen to para composiç ão das boas práticas (G) registro dos testes rápidos ou dos exames
+avaliados para síﬁlis, HIV e hepa tites B e C realiz ados no 1º trimes tre de cada gestação e (H) registro dos testes rápidos ou
+dos e xames a valiados par a síﬁlis e HIV r ealiz ados no 3º trimes tre de c ada g estação.
+Condicionante Código/Campo Descrição Observação
+CBO2251, 2252, 2253, 2231Médicos -
+2235 Enfermeiros -
+3222Técnico de Enfermagem; ou Auxiliar de Enfermagem;
+ou Técnico em Agente Comunitário de Saúde-
+Modelo de
+informaçãoModelo de Informação de
+Atendimento IndividualSerão considerados os registros de Peso e Altura do
+campo especíﬁco do PEC.Registros realizados
+no mesmo dia.Modelo de Informação de
+ProcedimentoSerão considerados os registros com os códigos
+SIGTAP especiﬁcados, com exceção do registro de
+procedimento consolidado.
+SIGTAP02.14.01.004-0Teste rápido para detecção de HIV na gestante ou
+pai/parceiro-
+02.14.01.027-9Teste rápido para detecção de anticorpos anti-HIV
+em gestante-
+02.14.01.005-8 Teste rápido para detecção de infecção pelo HIV -
+02.14.01.007-4 Teste rápido para síﬁlis -
+02.14.01.008-2 Teste rápido para síﬁlis na gestante ou pai/parceiro -
+02.14.01.025-2 Teste rápido treponêmico (síﬁlis) em gestante -
+02.14.01.009-0 Teste rápido para detecção de hepatite C -
+02.14.01.030-9Teste rápido para detecção de anticorpos contra o
+vírus da hepatite C em gestante.-
+02.14.01.010-4 Teste rápido para detecção de infecção pelo HBV -
+02.14.01.023-6Teste rápido para detecção do antígeno de
+superfície do vírus da hepatite B - HBV (HBSAG) em
+gestante.-
+02.13.01.078-0 Detecção rápida da carga viral do HIV -
+02.13.01.050-0 Quantiﬁcação da carga viral do HIV (RNA) -
+02.02.03.109-8 Teste treponêmico para detecção de síﬁlis -
+02.02.03.111-0 Teste não treponêmico para detecção de síﬁlis -
+Condicionante Código/Campo Descrição Observação
+02.02.03.117-9Teste não treponêmico para detecção de síﬁlis em
+gestante-
+02.02.03.078-4Pesquisa de anticorpos IgG e IgM contra o antígeno
+central do vírus da hepatite B (anti-HBC total)-
+02.02.03.097-0Pesquisa de antígeno de superfície do vírus da
+hepatite B (HBsAG)-
+02.13.01.020-8Identiﬁcação do vírus da hepatite B por PCR
+(quantitativo)-
+02.02.03.005-9 Detecção de RNA do vírus da hepatite C (qualitativo) -
+02.02.03.067-9Pesquisa de anticorpos contra o vírus da hepatite C
+(anti-HCV)-
+ 
+Quadr o 08. Detalhamen to para composiç ão da boa prática (K) pelo menos 01 atividade em saúde bucal
+realiz ada por cirur giã(ão) den tista ou t écnic a(o) de saúde buc al dur ante o período da g estação.
+Condicionante Código/Campo Descrição Observação
+CBO2232 Cirurgião Dentista -
+3224 Técnico em Saúde Bucal (TSB) -
+Modelo de
+informaçãoModelo de Informação de
+Atendimento Odontológico
+Individual (MIAOI)Serão considerados os registros realizados por proﬁssionais de
+saúde dos CBO supracitados, com CNS proﬁssional
+identiﬁcado, alocado conforme os códigos das equipes
+descritos.-
+Modelo de Informação de
+ProcedimentoSerão considerados os registros realizados por proﬁssionais de
+saúde dos CBO supracitados, com CNS proﬁssional
+identiﬁcado, alocado conforme os códigos das equipes
+descritos, com exceção do registro de procedimento
+consolidado.-
+Modelo de Informação de
+Atividade ColetivaSerão considerados os registros realizados por proﬁssionais de
+saúde dos CBO supracitados, com CNS proﬁssional
+identiﬁcado, alocado conforme os códigos das equipes
+descritos.-
+5. REFERÊNCIAS
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção à Saúde. Depart amen to de Atenção Básic a. Atenção ao pré-na tal de
+baix o risc o. Cadernos de A tenção Básic a, n° 32 – 1. ed. r ev. – Br asília: E ditora do Minis tério da Saúde, 2013.
+BRASIL. Minis tério da Saúde. Secr etaria de Vigilância em Saúde. Mort alidade propor cional por grupos  de causas em
+mulher es no Br asil em 2010 e 2019 . Bole tim epidemiológic o 29. 2021.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção à Saúde. Depart amen to de Atenção Básic a. Orien tações para a coleta e
+análise de dados antropomé tricos em serviços de saúde : Norma Técnic a do Sistema de Vigilância Alimen tar e Nutricional -
+SISVAN/Minis tério da Saúde, Secr etaria de Atenção à Saúde, Depart amen to de Atenção Básic a. – Brasília: Minis tério da
+Saúde, 2011.
+BRASIL. Minis tério da Saúde. Dir etrizes da P olític a Nacional de Saúde Buc al. Br asília, 2004.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção Primária à Saúde. Depart amen to de Ações Programá ticas. Manual de
+gestação de alt o risc o. Brasília 2022a.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção Primária à Saúde. Depart amen to de Saúde da Família. Diretriz para a
+prática clínic a odon tológic a na Atenção Primária à Saúde:  tratamen to em gestantes/Minis tério da Saúde, Secr etaria de
+Atenção Primária à Saúde, Depart amen to de Saúde da F amília. – Br asília: Minis tério da Saúde, 2022b.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção Primária à Saúde. Nota técnic a Nº 14/2022-S APS/MS.  Propor ção de
+gestantes com r ealiz ação de e xames par a síﬁlis e HIV . Brasília, 2022c.
+BRASIL. Minis tério da Saúde. Secr etaria de Vigilância em Saúde. Depart amen to de DST, Aids e Hepa tites Virais. Protocolo
+Clínic o e Dir etrizes Terapêutic as par a Prevenção da T ransmissão v ertic al de HIV , Síﬁlis e Hepa tites vir ais. Brasília, 2022d.
+BRASIL. Minis tério da Saúde. Secr etaria de Vigilância em Saúde e Ambien te. Depart amen to do Programa Nacional de
+Imuniz ações. Manual de Normas e Procedimen tos para Vacinaç ão. Depart amen to do Programa Nacional de Imuniz ações. –
+2.ed. – Br asília: Minis tério da Saúde, 2024.
+BRASIL. Minis tério da Saúde. Secr etaria de Vigilância em Saúde. Depart amen to de Doenç as de Condiç ões Crônic as e
+Infecções Sexualmen te Transmissív eis. Protocolo Clínic o e Diretrizes Terapêutic as para atenção integral às pessoas com
+infecções se xualmen te transmissív eis. Brasília, 2022.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção à Saúde. Depart amen to de Ações Programá ticas Estratégicas. Área
+Técnic a de Saúde da Mulher . Pré-na tal e Puerpério : atenção qualiﬁc ada e humaniz ada – manual técnic o/Minis tério da Saúde,
+Secr etaria de A tenção à Saúde, Depart amen to de Aç ões Pr ogramá ticas Es tratégicas – Br asília: Minis tério da Saúde, 2006.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção à Saúde. Depart amen to de Atenção Básic a. Saúde Bucal. Cadernos de
+Atenção Básic a - n.º 17.
+BRASIL. Minis tério da Saúde. Institut o Sírio-Libanês de Ensino e Pesquisa. Protocolos da Atenção Básic a: Saúde das
+Mulher es, 2016.
+BRASIL. Minis tério da Saúde. Secr etaria de Atenção Especializ ada à Saúde. Portaria SAES/MS nº 3.025, de 10 de julho de
+2025. Diário Oﬁcial da União: seção 1, p. 107-117, 16 jul. 2025. Disponív el em: https://w ww.in.gov.br/w eb/dou/-/port aria-
+saes/ms-n-3.025-de-10-de-julho-de-2025-642204697 . Acesso em: 15 ag o. 2025.
+CORBELLA , S. et al. Periodon tal diseas e as a risk factor for adverse pregnancy outcomes: a systema tic review and meta-
+analy sis of c ase–c ontrol studies. Odon tology , v. 100, p. 232-240, 2012.
+CHAMBR ONE, L. et al. Evidence grade associa ting periodon titis to preterm birth and/ or low birth weigh t: I. A systema tic
+review of pr ospectiv e cohort s tudies. Journal of clinic al periodon tology , v. 38, n. 9, p. 795-808, 2011.
+CENTER S FOR DISE ASE CONTR OL AND PREVENTION. Upda ted Recommenda tions for Use of Tetanus Toxoid, Reduced
+Diph theria T oxoid, and Acellular P ertussis V accine (T dap) in Pr egnan t Women. A tlanta: CDC , 2020.
+DOWSWELL , T. et al. Alterna tive versus standar d pack ages of antenatal care for low-risk pregnancy . Cochr ane database of
+systema tic reviews, n. 7, 2015.
+FUND AÇÃO OSWALDO CRUZ. Institut o Fernandes Figueir a. Portal de boas práticas em saúde da mulher , da crianç a e do
+adolescen te. 2021.
+PERA ÇOLI, J. C. et al. Pré-eclamp sia – Protocolo 2023. Rede Brasileir a de Estudos sobr e Hipert ensão na Gravidez (RBEHG),
+2023.
+POSSOBON, R. F.; MIALHE, F. L.; PEREIRA , A. C. Saúde bucal da gestante e da crianç a: atuaç ão preventiva precoce. In:
+PEREIRA , A.C. Tratado De Saúde Cole tiva em Odon tologia. No va Odessa: Napoleão , 2009.
+SGOLAS TRA, F. et al. Relationship between periodon titis and pre-eclamp sia: a meta-analy sis. PloS one,  v. 8, n. 8, p. e71387,
+2013.
+VOGEL , J. P. et al. Antenatal care pack ages with reduced visits and perina tal mort ality: a secondar y analy sis of the WHO
+Antenatal Car e Trial. Reproductiv e health,  v. 10, p. 1-7, 2013.
+World Health Organization (WHO). WHO recommenda tions on maternal and newborn care for a positiv e postnatal
+experience . Gene va: W orld Health Or ganization; 2022. Licence: CC B Y-NC-S A 3.0 IGO .
+World Health Organization. Pertussis vaccines: WHO position paper - Augus t 2015. Weekly Epidemiologic al Record, v. 90, n.
+35, p.433-460, 2015.
+Documento assinado eletronicamente por Ana Cláudia Cardozo Chaves, Coordenador(a)-Geral de Saúde da Família e
+Comunidade, em 29/08/2025, às 18:31, conforme horário oﬁcial de Brasília, com fundamento no § 3º, do art. 4º, do
+Decreto nº 10.543, de 13 de novembro de 2020; e art. 8º, da Portaria nº 900 de 31 de Março de 2017.
+Documento assinado eletronicamente por José Eudes Barroso Vieira, Diretor(a) do Departamento Estratégias e Políticas
+de Saúde Comunitária, em 29/08/2025, às 18:56, conforme horário oﬁcial de Brasília, com fundamento no § 3º, do art. 4º,
+do Decreto nº 10.543, de 13 de novembro de 2020; e art. 8º, da Portaria nº 900 de 31 de Março de 2017.
+A autenticidade deste documento pode ser conferida no site http://sei.saude.gov.br/sei/controlador_externo.php?
+acao=documento_conferir&id_orgao_acesso_externo=0, informando o código veriﬁcador 0050086461 e o código CRC
+F2597032.
+Referência:  Processo nº 25000.137969/2025-22 SEI nº 0050086461
+ 
+Depart amen to de Es tratégias e P olític as de Saúde Comunit ária - DE SCO
+Esplanada dos Minis térios, Bloc o G  - Bairr o Zona Cívic o-Adminis trativa, Br asília/DF , CEP 70058-900
+Site - saude. gov.br
+  
