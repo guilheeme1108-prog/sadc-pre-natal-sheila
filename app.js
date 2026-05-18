@@ -15,15 +15,18 @@ equipeSelect.addEventListener('change', (e) => {
     const isEAP = e.target.value === 'eAP - Tipo 76';
     const checkE = document.getElementById('check-E');
     const checkJ = document.getElementById('check-J');
+    const groupAcs = document.getElementById('group-acs');
     
     if (isEAP) {
         checkE.style.display = 'none';
         checkJ.style.display = 'none';
+        groupAcs.style.display = 'none';
         checkE.querySelector('input').checked = false;
         checkJ.querySelector('input').checked = false;
     } else {
         checkE.style.display = 'flex';
         checkJ.style.display = 'flex';
+        groupAcs.style.display = 'flex';
     }
 });
 
@@ -116,6 +119,7 @@ sadcForm.addEventListener('submit', (e) => {
     const profissional = document.getElementById('profissional').value;
     const tipoEquipe = document.getElementById('equipe').value;
     const observacoes = document.getElementById('observacoes').value;
+    const acsInput = document.getElementById('acs').value;
 
     // Coletar checkboxes
     const checkboxes = document.querySelectorAll('.custom-checkbox input:checked');
@@ -136,6 +140,7 @@ sadcForm.addEventListener('submit', (e) => {
             dum: dumInput,
             equipe: "INE 000000 - " + tipoEquipe,
             tipoEquipe: tipoEquipe,
+            acs: acsInput,
             atendimentos: []
         };
         gestantes.push(gestante);
@@ -144,6 +149,7 @@ sadcForm.addEventListener('submit', (e) => {
         gestante.dum = dumInput;
         gestante.dataNascimento = dataNascimento || gestante.dataNascimento;
         gestante.tipoEquipe = tipoEquipe;
+        if (acsInput) gestante.acs = acsInput;
     }
 
     // Adicionar novo atendimento
@@ -162,6 +168,7 @@ sadcForm.addEventListener('submit', (e) => {
     // Resetar condicionais
     document.getElementById('check-E').style.display = 'flex';
     document.getElementById('check-J').style.display = 'flex';
+    document.getElementById('group-acs').style.display = 'flex';
 
     // Redirecionar para o dashboard para ver a paciente salva
     setTimeout(() => {
@@ -256,6 +263,7 @@ function abrirFicha(g) {
     const dumBr = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
     document.getElementById('f-dum').innerText = `DUM: ${dumBr}`;
     document.getElementById('f-equipe').innerText = g.equipe;
+    document.getElementById('f-acs').innerText = g.acs ? `ACS: ${g.acs}` : `ACS: Não informado`;
 
     const fCircle = document.getElementById('f-circle');
     fCircle.className = `score-circle ${g.semaforoGeral}`;
