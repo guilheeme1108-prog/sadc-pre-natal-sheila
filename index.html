@@ -70,6 +70,13 @@
                             <label for="acs">Nome do Agente de Saúde (ACS)</label>
                             <input type="text" id="acs" class="form-control" placeholder="Opcional">
                         </div>
+                        <div class="form-group">
+                            <label for="classificacaoRisco">Classificação de Risco *</label>
+                            <select id="classificacaoRisco" class="form-control" required>
+                                <option value="Risco Habitual">Risco Habitual</option>
+                                <option value="Alto Risco">Alto Risco</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="checkbox-group-title">O que foi realizado NESTA consulta? (Checklist Nota C3)</div>
@@ -214,6 +221,7 @@
                             <th>Gestante</th>
                             <th>Status</th>
                             <th>Idade Gest.</th>
+                            <th>Última Consulta</th>
                             <th>Nota C3</th>
                             <th>Alertas Ativos</th>
                         </tr>

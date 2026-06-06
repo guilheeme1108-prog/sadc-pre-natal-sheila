@@ -15,6 +15,7 @@ const mockGestantes = [
         dum: gerarDataPassada(10), // 10 semanas
         equipe: "INE 123456 - Equipe Saúde da Família",
         tipoEquipe: "eSF - Tipo 70",
+        classificacaoRisco: "Risco Habitual",
         atendimentos: [
             {
                 data: gerarDataPassada(2),
@@ -30,6 +31,7 @@ const mockGestantes = [
         dum: gerarDataPassada(32), // 32 semanas
         equipe: "INE 123456 - Equipe Saúde da Família",
         tipoEquipe: "eSF - Tipo 70",
+        classificacaoRisco: "Alto Risco",
         atendimentos: [
             { data: gerarDataPassada(30), profissional: "Médica Clara", boasPraticas: ['A', 'B', 'C', 'D', 'G'] },
             { data: gerarDataPassada(26), profissional: "Enf. João", boasPraticas: ['B', 'C', 'D'] },
@@ -44,6 +46,7 @@ const mockGestantes = [
         dum: gerarDataPassada(38), // 38 semanas (Atrasada em várias coisas)
         equipe: "INE 987654 - eAP Centro",
         tipoEquipe: "eAP - Tipo 76",
+        classificacaoRisco: "Alto Risco",
         atendimentos: [
             { data: gerarDataPassada(20), profissional: "Médica Clara", boasPraticas: ['B', 'C', 'D'] } // Captação tardia (Sem 'A')
         ]
@@ -55,6 +58,7 @@ const mockGestantes = [
         dum: gerarDataPassada(44), // Puerpério (44 semanas = 2 após 42)
         equipe: "INE 123456 - Equipe Saúde da Família",
         tipoEquipe: "eSF - Tipo 70",
+        classificacaoRisco: "Risco Habitual",
         atendimentos: [
             { data: gerarDataPassada(36), profissional: "Enf. João", boasPraticas: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K'] },
             { data: gerarDataPassada(32), profissional: "Enf. João", boasPraticas: ['B', 'C', 'D', 'E'] },

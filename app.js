@@ -120,6 +120,7 @@ sadcForm.addEventListener('submit', (e) => {
     const tipoEquipe = document.getElementById('equipe').value;
     const observacoes = document.getElementById('observacoes').value;
     const acsInput = document.getElementById('acs').value;
+    const classificacaoRiscoInput = document.getElementById('classificacaoRisco').value;
 
     // Coletar checkboxes
     const checkboxes = document.querySelectorAll('.custom-checkbox input:checked');
@@ -141,6 +142,7 @@ sadcForm.addEventListener('submit', (e) => {
             equipe: "INE 000000 - " + tipoEquipe,
             tipoEquipe: tipoEquipe,
             acs: acsInput,
+            classificacaoRisco: classificacaoRiscoInput,
             atendimentos: []
         };
         gestantes.push(gestante);
@@ -149,6 +151,7 @@ sadcForm.addEventListener('submit', (e) => {
         gestante.dum = dumInput;
         gestante.dataNascimento = dataNascimento || gestante.dataNascimento;
         gestante.tipoEquipe = tipoEquipe;
+        gestante.classificacaoRisco = classificacaoRiscoInput;
         if (acsInput) gestante.acs = acsInput;
     }
 
@@ -203,11 +206,15 @@ function renderDashboard() {
         return b.igSemanas - a.igSemanas;
     });
 
+    let activeIndex = 1;
     gestantesAvaliadas.forEach(g => {
         if (g.statusGestacao !== "Encerrada") {
             stats.total++;
             stats[g.semaforoGeral]++;
             stats.somaNotas += g.nota;
+
+            g.nomeAnonimo = `Paciente ${activeIndex++}`;
+            g.cpfMasked = "xxx.xxx.xxx-xx";
 
             const tr = document.createElement('tr');
             tr.onclick = () => abrirFicha(g);
@@ -221,15 +228,32 @@ function renderDashboard() {
             let alertasHTML = g.alertas.map(a => `<span class="alert-item ${a.cor}">• ${a.msg}</span>`).join('');
             if (alertasHTML === '') alertasHTML = '<span class="alert-item verde">Tudo OK</span>';
 
+            // Última consulta
+            const sortedAtends = [...g.atendimentos].sort((a,b) => new Date(a.data) - new Date(b.data));
+            const ultimaData = sortedAtends.length > 0 ? sortedAtends[sortedAtends.length - 1].data : null;
+            let ultimaDataFormatada = "-";
+            if (ultimaData) {
+                const parts = ultimaData.split('-');
+                ultimaDataFormatada = `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+
+            // Classificação de risco
+            const risco = g.classificacaoRisco || "Risco Habitual";
+            const riscoBadgeClass = risco === "Alto Risco" ? "risco-alto" : "risco-habitual";
+
             tr.innerHTML = `
                 <td>
-                    <div style="font-weight:600; color:var(--dark);">${g.nome}</div>
-                    <div style="font-size:0.85rem; color:var(--gray);">${g.cpf}</div>
+                    <div style="font-weight:600; color:var(--dark);">${g.nomeAnonimo}</div>
+                    <div style="font-size:0.8rem; margin: 2px 0 4px 0;"><span class="risco-badge ${riscoBadgeClass}">${risco}</span></div>
+                    <div style="font-size:0.85rem; color:var(--gray);">${g.cpfMasked}</div>
                 </td>
                 <td>${badgesSemaforo[g.semaforoGeral]}</td>
                 <td>
                     <div style="font-weight:600;">${g.igSemanas} sem.</div>
                     <div style="font-size:0.85rem; color:var(--gray);">${g.statusGestacao}</div>
+                </td>
+                <td>
+                    <div style="font-weight:500;">${ultimaDataFormatada}</div>
                 </td>
                 <td><strong style="font-size:1.2rem;">${g.nota}</strong> <span style="font-size:0.8rem;color:var(--gray)">/100</span></td>
                 <td class="alert-list">${alertasHTML}</td>
@@ -255,8 +279,11 @@ let gestanteAtual = null;
 
 function abrirFicha(g) {
     gestanteAtual = g;
-    document.getElementById('f-nome').innerText = g.nome;
-    document.getElementById('f-cpf').innerText = `CPF: ${g.cpf}`;
+    document.getElementById('f-nome').innerText = g.nomeAnonimo || "Paciente";
+    
+    const risco = g.classificacaoRisco || "Risco Habitual";
+    const riscoBadgeClass = risco === "Alto Risco" ? "risco-alto" : "risco-habitual";
+    document.getElementById('f-cpf').innerHTML = `CPF: xxx.xxx.xxx-xx &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span>`;
     
     // Formatar data DUM
     const dataParts = g.dum.split('-');

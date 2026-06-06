@@ -348,6 +348,24 @@ tbody tr:hover {
 .badge-amarelo { background: var(--amarelo-bg); color: #92400E; }
 .badge-vermelho { background: var(--vermelho-bg); color: #991B1B; }
 
+.risco-badge {
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+.risco-alto {
+    background-color: var(--vermelho-bg);
+    color: #991B1B;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.risco-habitual {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(10, 88, 202, 0.2);
+}
+
 .semaforo-dot {
     width: 10px;
     height: 10px;
