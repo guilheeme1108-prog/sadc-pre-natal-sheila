@@ -246,7 +246,8 @@ function renderDashboard() {
             
             stats[g.semaforoGeral]++;
 
-            g.nomeAnonimo = `Paciente ${activeIndex++}`;
+            // Usando nome real da gestante
+            const nomeExibicao = g.nome || `Paciente ${activeIndex++}`;
             g.cpfMasked = g.cpf; // Removed mask
 
             const tr = document.createElement('tr');
@@ -276,7 +277,7 @@ function renderDashboard() {
 
             tr.innerHTML = `
                 <td>
-                    <div style="font-weight:600; color:var(--dark);">${g.nomeAnonimo}</div>
+                    <div style="font-weight:600; color:var(--dark);">${nomeExibicao}</div>
                     <div style="font-size:0.8rem; margin: 2px 0 4px 0;"><span class="risco-badge ${riscoBadgeClass}">${risco}</span></div>
                     <div style="font-size:0.85rem; color:var(--gray);">${g.cpfMasked}</div>
                 </td>
@@ -313,7 +314,7 @@ let gestanteAtual = null;
 
 function abrirFicha(g) {
     gestanteAtual = g;
-    document.getElementById('f-nome').innerText = g.nomeAnonimo || "Paciente";
+    document.getElementById('f-nome').innerText = g.nome || "Paciente";
     
     const risco = g.classificacaoRisco || "Risco Habitual";
     const riscoBadgeClass = risco === "Alto Risco" ? "risco-alto" : "risco-habitual";
