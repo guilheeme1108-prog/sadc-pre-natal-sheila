@@ -66,6 +66,13 @@
                                 <option value="eAP - Tipo 76">Atenção Primária (eAP - Tipo 76)</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="pertenceEquipe">Vínculo com a Unidade *</label>
+                            <select id="pertenceEquipe" class="form-control" required>
+                                <option value="da equipe">Gestante da Equipe</option>
+                                <option value="extra área">Gestante Extra Área</option>
+                            </select>
+                        </div>
                         <div class="form-group" id="group-acs">
                             <label for="acs">Nome do Agente de Saúde (ACS)</label>
                             <input type="text" id="acs" class="form-control" placeholder="Opcional">
@@ -193,11 +200,15 @@
 
             <div class="stats-grid">
                 <div class="stat-card primary">
-                    <span class="stat-label">Total Gestantes Ativas</span>
-                    <span class="stat-value" id="dash-total">0</span>
+                    <span class="stat-label">Gestantes da Equipe</span>
+                    <span class="stat-value" id="dash-total-equipe">0</span>
                 </div>
                 <div class="stat-card primary">
-                    <span class="stat-label">Nota Média da Equipe</span>
+                    <span class="stat-label">Gestantes Extra Área</span>
+                    <span class="stat-value" id="dash-total-extra">0</span>
+                </div>
+                <div class="stat-card primary">
+                    <span class="stat-label">Nota Média (Equipe)</span>
                     <span class="stat-value" id="dash-media">0%</span>
                 </div>
                 <div class="stat-card verde">

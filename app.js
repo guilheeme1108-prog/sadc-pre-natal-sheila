@@ -112,12 +112,15 @@ sadcForm.addEventListener('submit', (e) => {
         cpfError.style.display = 'none';
     }
 
+    // Autopreenchimento: Verificar se CPF já existe no blur/input (implementado fora do submit também)
+    
     const nomeInput = document.getElementById('nome').value;
     const dataNascimento = document.getElementById('dataNascimento').value;
     const dumInput = document.getElementById('dum').value;
     const dataAtend = document.getElementById('dataAtendimento').value;
     const profissional = document.getElementById('profissional').value;
     const tipoEquipe = document.getElementById('equipe').value;
+    const pertenceEquipe = document.getElementById('pertenceEquipe').value;
     const observacoes = document.getElementById('observacoes').value;
     const acsInput = document.getElementById('acs').value;
     const classificacaoRiscoInput = document.getElementById('classificacaoRisco').value;
@@ -141,6 +144,7 @@ sadcForm.addEventListener('submit', (e) => {
             dum: dumInput,
             equipe: "INE 000000 - " + tipoEquipe,
             tipoEquipe: tipoEquipe,
+            pertenceEquipe: pertenceEquipe,
             acs: acsInput,
             classificacaoRisco: classificacaoRiscoInput,
             atendimentos: []
@@ -151,6 +155,7 @@ sadcForm.addEventListener('submit', (e) => {
         gestante.dum = dumInput;
         gestante.dataNascimento = dataNascimento || gestante.dataNascimento;
         gestante.tipoEquipe = tipoEquipe;
+        gestante.pertenceEquipe = pertenceEquipe;
         gestante.classificacaoRisco = classificacaoRiscoInput;
         if (acsInput) gestante.acs = acsInput;
     }
@@ -173,10 +178,31 @@ sadcForm.addEventListener('submit', (e) => {
     document.getElementById('check-J').style.display = 'flex';
     document.getElementById('group-acs').style.display = 'flex';
 
-    // Redirecionar para o dashboard para ver a paciente salva
+// Redirecionar para o dashboard para ver a paciente salva
     setTimeout(() => {
         btnDash.click();
     }, 1500);
+});
+
+// Autopreenchimento pelo CPF
+document.getElementById('cpf').addEventListener('blur', (e) => {
+    const cpfInput = e.target.value;
+    if (validarDocumento(cpfInput)) {
+        let gestantes = getGestantes();
+        let gestante = gestantes.find(g => g.cpf === cpfInput);
+        if (gestante) {
+            document.getElementById('nome').value = gestante.nome;
+            document.getElementById('dataNascimento').value = gestante.dataNascimento || "";
+            document.getElementById('dum').value = gestante.dum;
+            document.getElementById('equipe').value = gestante.tipoEquipe || "eSF - Tipo 70";
+            if (gestante.pertenceEquipe) document.getElementById('pertenceEquipe').value = gestante.pertenceEquipe;
+            document.getElementById('acs').value = gestante.acs || "";
+            document.getElementById('classificacaoRisco').value = gestante.classificacaoRisco || "Risco Habitual";
+            showToast("Dados da gestante carregados automaticamente.");
+            // Dispara evento para atualizar selects
+            document.getElementById('equipe').dispatchEvent(new Event('change'));
+        }
+    }
 });
 
 // Autopreencher data do atendimento com data de hoje
@@ -191,7 +217,7 @@ function renderDashboard() {
     const tbody = document.getElementById('dash-tbody');
     tbody.innerHTML = '';
 
-    let stats = { total: 0, verde: 0, amarelo: 0, vermelho: 0, somaNotas: 0 };
+    let stats = { total_equipe: 0, total_extra: 0, verde: 0, amarelo: 0, vermelho: 0, somaNotasEquipe: 0 };
 
     // Processar gestantes através do Motor C3
     const gestantesAvaliadas = gestantes.map(g => {
@@ -209,9 +235,16 @@ function renderDashboard() {
     let activeIndex = 1;
     gestantesAvaliadas.forEach(g => {
         if (g.statusGestacao !== "Encerrada") {
-            stats.total++;
+            const isEquipe = (g.pertenceEquipe === 'da equipe' || !g.pertenceEquipe); // Padrão 'da equipe'
+            
+            if (isEquipe) {
+                stats.total_equipe++;
+                stats.somaNotasEquipe += g.nota;
+            } else {
+                stats.total_extra++;
+            }
+            
             stats[g.semaforoGeral]++;
-            stats.somaNotas += g.nota;
 
             g.nomeAnonimo = `Paciente ${activeIndex++}`;
             g.cpfMasked = "xxx.xxx.xxx-xx";
@@ -262,10 +295,11 @@ function renderDashboard() {
         }
     });
 
-    const media = stats.total > 0 ? Math.round(stats.somaNotas / stats.total) : 0;
+    const mediaEquipe = stats.total_equipe > 0 ? Math.round(stats.somaNotasEquipe / stats.total_equipe) : 0;
     
-    document.getElementById('dash-total').innerText = stats.total;
-    document.getElementById('dash-media').innerText = media + "%";
+    document.getElementById('dash-total-equipe').innerText = stats.total_equipe;
+    document.getElementById('dash-total-extra').innerText = stats.total_extra;
+    document.getElementById('dash-media').innerText = mediaEquipe + "%";
     document.getElementById('dash-verde').innerText = stats.verde;
     document.getElementById('dash-amarelo').innerText = stats.amarelo;
     document.getElementById('dash-vermelho').innerText = stats.vermelho;
@@ -283,7 +317,8 @@ function abrirFicha(g) {
     
     const risco = g.classificacaoRisco || "Risco Habitual";
     const riscoBadgeClass = risco === "Alto Risco" ? "risco-alto" : "risco-habitual";
-    document.getElementById('f-cpf').innerHTML = `CPF: xxx.xxx.xxx-xx &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span>`;
+    const vinculotxt = g.pertenceEquipe === 'extra área' ? "Extra Área" : "Da Equipe";
+    document.getElementById('f-cpf').innerHTML = `CPF: xxx.xxx.xxx-xx &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span> &nbsp;&nbsp;|&nbsp;&nbsp; Vínculo: ${vinculotxt}`;
     
     // Formatar data DUM
     const dataParts = g.dum.split('-');
@@ -291,6 +326,30 @@ function abrirFicha(g) {
     document.getElementById('f-dum').innerText = `DUM: ${dumBr}`;
     document.getElementById('f-equipe').innerText = g.equipe;
     document.getElementById('f-acs').innerText = g.acs ? `ACS: ${g.acs}` : `ACS: Não informado`;
+
+    // Auditoria (Segurança)
+    const sortedAuditoria = [...g.atendimentos].sort((a,b) => new Date(a.data) - new Date(b.data));
+    let msgAuditoria = "";
+    if (sortedAuditoria.length > 0) {
+        const formatDateStr = (iso) => {
+            const p = iso.split('-'); return `${p[2]}/${p[1]}/${p[0]}`;
+        };
+        const cad = sortedAuditoria[0];
+        msgAuditoria = `<strong>Cadastrada por:</strong> ${cad.profissional} em ${formatDateStr(cad.data)}`;
+        if (sortedAuditoria.length > 1) {
+            const ult = sortedAuditoria[sortedAuditoria.length - 1];
+            msgAuditoria += `<br><strong>Última alteração por:</strong> ${ult.profissional} em ${formatDateStr(ult.data)}`;
+        }
+    }
+    
+    let containerAuditoria = document.getElementById('f-auditoria');
+    if (!containerAuditoria) {
+        containerAuditoria = document.createElement('div');
+        containerAuditoria.id = 'f-auditoria';
+        containerAuditoria.style = "margin-top: 1rem; font-size: 0.85rem; color: var(--gray); background: #f8f9fa; padding: 8px; border-radius: 4px; border-left: 3px solid var(--primary);";
+        document.querySelector('.ficha-header').appendChild(containerAuditoria);
+    }
+    containerAuditoria.innerHTML = msgAuditoria;
 
     const fCircle = document.getElementById('f-circle');
     fCircle.className = `score-circle ${g.semaforoGeral}`;
