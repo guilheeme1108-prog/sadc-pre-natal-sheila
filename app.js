@@ -194,6 +194,16 @@ document.getElementById('cpf').addEventListener('blur', (e) => {
             document.getElementById('nome').value = gestante.nome;
             document.getElementById('dataNascimento').value = gestante.dataNascimento || "";
             document.getElementById('dum').value = gestante.dum;
+            
+            // Autocalcular DPP naegele para a gestante encontrada
+            if (gestante.dum) {
+                const dppCalc = C3Engine.calcularDPP(gestante.dum);
+                if (dppCalc) {
+                    const dp = dppCalc.split('-');
+                    document.getElementById('dppForm').value = `${dp[2]}/${dp[1]}/${dp[0]}`;
+                }
+            }
+
             document.getElementById('equipe').value = gestante.tipoEquipe || "eSF - Tipo 70";
             if (gestante.pertenceEquipe) document.getElementById('pertenceEquipe').value = gestante.pertenceEquipe;
             document.getElementById('acs').value = gestante.acs || "";
@@ -202,6 +212,20 @@ document.getElementById('cpf').addEventListener('blur', (e) => {
             // Dispara evento para atualizar selects
             document.getElementById('equipe').dispatchEvent(new Event('change'));
         }
+    }
+});
+
+// Evento para calcular DPP automaticamente quando a DUM for inserida
+document.getElementById('dum').addEventListener('change', (e) => {
+    const dumVal = e.target.value;
+    if (dumVal) {
+        const dppCalc = C3Engine.calcularDPP(dumVal);
+        if (dppCalc) {
+            const dp = dppCalc.split('-');
+            document.getElementById('dppForm').value = `${dp[2]}/${dp[1]}/${dp[0]}`;
+        }
+    } else {
+        document.getElementById('dppForm').value = "";
     }
 });
 
@@ -321,10 +345,19 @@ function abrirFicha(g) {
     const vinculotxt = g.pertenceEquipe === 'extra área' ? "Extra Área" : "Da Equipe";
     document.getElementById('f-cpf').innerHTML = `CPF: ${g.cpf} &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span> &nbsp;&nbsp;|&nbsp;&nbsp; Vínculo: ${vinculotxt}`;
     
-    // Formatar data DUM
+    // Formatar data DUM e DPP
     const dataParts = g.dum.split('-');
     const dumBr = `${dataParts[2]}/${dataParts[1]}/${dataParts[0]}`;
     document.getElementById('f-dum').innerText = `DUM: ${dumBr}`;
+    
+    const dppCalc = C3Engine.calcularDPP(g.dum);
+    if (dppCalc) {
+        const dp = dppCalc.split('-');
+        document.getElementById('f-dpp').innerText = `DPP: ${dp[2]}/${dp[1]}/${dp[0]}`;
+    } else {
+        document.getElementById('f-dpp').innerText = `DPP: Não calculada`;
+    }
+
     document.getElementById('f-equipe').innerText = g.equipe;
     document.getElementById('f-acs').innerText = g.acs ? `ACS: ${g.acs}` : `ACS: Não informado`;
 

@@ -23,7 +23,22 @@ const C3Engine = {
 
     // 2.2 - Cálculos automáticos obrigatórios
     calcularDPP: (dum) => {
-        return C3Engine.addDays(dum, 280); // DPP clássica: +280 dias
+        if (!dum) return "";
+        const parts = dum.split('-');
+        if (parts.length !== 3) return "";
+        let year = parseInt(parts[0], 10);
+        let month = parseInt(parts[1], 10) - 1; // 0-indexed
+        let day = parseInt(parts[2], 10);
+        
+        let dppDate = new Date(year, month, day);
+        // Regra de Naegele: +7 dias, +9 meses
+        dppDate.setDate(dppDate.getDate() + 7);
+        dppDate.setMonth(dppDate.getMonth() + 9);
+        
+        const y = dppDate.getFullYear();
+        const m = String(dppDate.getMonth() + 1).padStart(2, '0');
+        const d = String(dppDate.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
     },
 
     calcularIG: (dum, dataReferencia = new Date()) => {
