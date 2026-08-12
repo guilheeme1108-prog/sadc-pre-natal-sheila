@@ -247,7 +247,7 @@ function renderDashboard() {
             stats[g.semaforoGeral]++;
 
             g.nomeAnonimo = `Paciente ${activeIndex++}`;
-            g.cpfMasked = "xxx.xxx.xxx-xx";
+            g.cpfMasked = g.cpf; // Removed mask
 
             const tr = document.createElement('tr');
             tr.onclick = () => abrirFicha(g);
@@ -318,7 +318,7 @@ function abrirFicha(g) {
     const risco = g.classificacaoRisco || "Risco Habitual";
     const riscoBadgeClass = risco === "Alto Risco" ? "risco-alto" : "risco-habitual";
     const vinculotxt = g.pertenceEquipe === 'extra área' ? "Extra Área" : "Da Equipe";
-    document.getElementById('f-cpf').innerHTML = `CPF: xxx.xxx.xxx-xx &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span> &nbsp;&nbsp;|&nbsp;&nbsp; Vínculo: ${vinculotxt}`;
+    document.getElementById('f-cpf').innerHTML = `CPF: ${g.cpf} &nbsp;&nbsp;|&nbsp;&nbsp; <span class="risco-badge ${riscoBadgeClass}">${risco}</span> &nbsp;&nbsp;|&nbsp;&nbsp; Vínculo: ${vinculotxt}`;
     
     // Formatar data DUM
     const dataParts = g.dum.split('-');
