@@ -52,16 +52,53 @@ function showToast(message) {
     setTimeout(() => { toast.classList.remove('show'); }, 3000);
 }
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBfRWPAiWz56kIAgD65egEWruaqTVdMITM",
+  authDomain: "sadc-prenatal.firebaseapp.com",
+  projectId: "sadc-prenatal",
+  storageBucket: "sadc-prenatal.firebasestorage.app",
+  messagingSenderId: "779345423814",
+  appId: "1:779345423814:web:60ba6799e60ca6d14c16c7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 // -----------------------------------------
-// DATA LAYER (LocalStorage)
+// DATA LAYER (Firebase)
 // -----------------------------------------
 
-function getGestantes() {
-    return JSON.parse(localStorage.getItem('sadc_gestantes')) || [];
+async function getGestantes() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "gestantes"));
+        const gestantes = [];
+        querySnapshot.forEach((doc) => {
+            gestantes.push(doc.data());
+        });
+        return gestantes;
+    } catch (e) {
+        console.error("Erro ao buscar dados do Firebase: ", e);
+        return [];
+    }
 }
 
-function saveGestantes(data) {
-    localStorage.setItem('sadc_gestantes', JSON.stringify(data));
+async function saveGestante(gestante) {
+    try {
+        await setDoc(doc(db, "gestantes", gestante.id), gestante);
+    } catch (e) {
+        console.error("Erro ao salvar no Firebase: ", e);
+    }
+}
+
+async function deleteGestanteDB(id) {
+    try {
+        await deleteDoc(doc(db, "gestantes", id));
+    } catch (e) {
+        console.error("Erro ao deletar no Firebase: ", e);
+    }
 }
 
 // -----------------------------------------
@@ -98,8 +135,14 @@ function validarDocumento(doc) {
 // FORMULÁRIO (Camada 1)
 // -----------------------------------------
 
-sadcForm.addEventListener('submit', (e) => {
+sadcForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Mudar estado do botão
+    const btnSubmit = document.querySelector('.btn-submit');
+    const originalText = btnSubmit.innerText;
+    btnSubmit.innerText = "Salvando na Nuvem...";
+    btnSubmit.disabled = true;
 
     const cpfInput = document.getElementById('cpf').value;
     const cpfError = document.getElementById('cpf-error');
@@ -107,6 +150,8 @@ sadcForm.addEventListener('submit', (e) => {
     if (!validarDocumento(cpfInput)) {
         cpfError.style.display = 'block';
         document.getElementById('cpf').focus();
+        btnSubmit.innerText = originalText;
+        btnSubmit.disabled = false;
         return;
     } else {
         cpfError.style.display = 'none';
@@ -129,7 +174,7 @@ sadcForm.addEventListener('submit', (e) => {
     const checkboxes = document.querySelectorAll('.custom-checkbox input:checked');
     const boasPraticas = Array.from(checkboxes).map(cb => cb.value);
 
-    let gestantes = getGestantes();
+    let gestantes = await getGestantes();
     
     // Buscar se a gestante já existe pelo CPF
     let gestante = gestantes.find(g => g.cpf === cpfInput);
@@ -168,10 +213,12 @@ sadcForm.addEventListener('submit', (e) => {
         boasPraticas: boasPraticas
     });
 
-    saveGestantes(gestantes);
+    await saveGestante(gestante);
     
-    showToast("Atendimento Salvo com Sucesso! Redirecionando...");
+    showToast("Atendimento Salvo com Sucesso na Nuvem! Redirecionando...");
     sadcForm.reset();
+    btnSubmit.innerText = originalText;
+    btnSubmit.disabled = false;
     
     // Resetar condicionais
     document.getElementById('check-E').style.display = 'flex';
@@ -185,10 +232,10 @@ sadcForm.addEventListener('submit', (e) => {
 });
 
 // Autopreenchimento pelo CPF
-document.getElementById('cpf').addEventListener('blur', (e) => {
+document.getElementById('cpf').addEventListener('blur', async (e) => {
     const cpfInput = e.target.value;
     if (validarDocumento(cpfInput)) {
-        let gestantes = getGestantes();
+        let gestantes = await getGestantes();
         let gestante = gestantes.find(g => g.cpf === cpfInput);
         if (gestante) {
             document.getElementById('nome').value = gestante.nome;
@@ -236,9 +283,11 @@ document.getElementById('dataAtendimento').valueAsDate = new Date();
 // DASHBOARD (Camada 3)
 // -----------------------------------------
 
-function renderDashboard() {
-    const gestantes = getGestantes();
+async function renderDashboard() {
     const tbody = document.getElementById('dash-tbody');
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 2rem;">🔄 Carregando dados da nuvem (Firebase)...</td></tr>';
+
+    const gestantes = await getGestantes();
     tbody.innerHTML = '';
 
     let stats = { total_equipe: 0, total_extra: 0, verde: 0, amarelo: 0, vermelho: 0, somaNotasEquipe: 0 };
@@ -449,19 +498,18 @@ function abrirFicha(g) {
     modalFicha.classList.add('active');
 }
 
-window.apagarPacienteAtual = function() {
+window.apagarPacienteAtual = async function() {
     if (!gestanteAtual) return;
     
     const btn = document.getElementById('btn-apagar-paciente');
     
     // Se já estiver no estado de confirmação, executa a exclusão
     if (btn.innerText.includes("Confirmar Exclusão")) {
-        let gestantes = getGestantes();
-        gestantes = gestantes.filter(gest => gest.cpf !== gestanteAtual.cpf);
-        saveGestantes(gestantes);
+        btn.innerHTML = "⏳ Excluindo da Nuvem...";
+        await deleteGestanteDB(gestanteAtual.id);
         fecharModal();
-        renderDashboard();
-        showToast("Paciente removida com sucesso.");
+        await renderDashboard();
+        showToast("Paciente removida com sucesso da nuvem.");
         
         // Resetar o botão para o estado original escondido
         setTimeout(() => {
@@ -483,11 +531,11 @@ window.apagarPacienteAtual = function() {
     }
 };
 
-function fecharModal() {
+window.fecharModal = function() {
     modalFicha.classList.remove('active');
 }
 
 // Fechar modal clicando fora
 modalFicha.addEventListener('click', (e) => {
-    if (e.target === modalFicha) fecharModal();
+    if (e.target === modalFicha) window.fecharModal();
 });
