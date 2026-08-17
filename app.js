@@ -474,25 +474,45 @@ function abrirFicha(g) {
     const ac = g.acumulado;
 
     const metas = [
-        { desc: "Captação Precoce (Até 12ª Sem)", ok: ac.captacaoPrecoce },
-        { desc: `Consultas Méd./Enf. (${ac.consultas}/7)`, ok: ac.consultas >= 7 },
-        { desc: `Pressão Arterial (${ac.pa}/7)`, ok: ac.pa >= 7 },
-        { desc: `Antropometria (${ac.antropometria}/7)`, ok: ac.antropometria >= 7 },
-        { desc: "Vacina dTpa", ok: ac.dTpa },
-        { desc: "Exames 1º Trimestre", ok: ac.exames1Tri },
-        { desc: "Exames 3º Trimestre", ok: ac.exames3Tri },
-        { desc: "Saúde Bucal", ok: ac.saudeBucal },
-        { desc: "Consulta Puerpério", ok: ac.consultaPuerperio }
+        { desc: "Captação Precoce (Até 12ª Sem)", ok: ac.captacaoPrecoce, code: 'A' },
+        { desc: `Consultas Méd./Enf. (${ac.consultas}/7)`, ok: ac.consultas >= 7, code: 'B' },
+        { desc: `Pressão Arterial (${ac.pa}/7)`, ok: ac.pa >= 7, code: 'C' },
+        { desc: `Antropometria (${ac.antropometria}/7)`, ok: ac.antropometria >= 7, code: 'D' },
+        { desc: "Vacina dTpa", ok: ac.dTpa, code: 'F' },
+        { desc: "Exames 1º Trimestre", ok: ac.exames1Tri, code: 'G' },
+        { desc: "Exames 3º Trimestre", ok: ac.exames3Tri, code: 'H' },
+        { desc: "Saúde Bucal", ok: ac.saudeBucal, code: 'K' },
+        { desc: "Consulta Puerpério", ok: ac.consultaPuerperio, code: 'I' }
     ];
 
     if (!eAP) {
-        metas.splice(4, 0, { desc: `Visitas ACS Gestação (${ac.visitasACS}/3)`, ok: ac.visitasACS >= 3 });
-        metas.push({ desc: "Visita ACS Puerpério", ok: ac.visitaPuerperioACS });
+        metas.splice(4, 0, { desc: `Visitas ACS Gestação (${ac.visitasACS}/3)`, ok: ac.visitasACS >= 3, code: 'E' });
+        metas.push({ desc: "Visita ACS Puerpério", ok: ac.visitaPuerperioACS, code: 'J' });
     }
+
+    const formatDt = (iso) => {
+        const p = iso.split('-');
+        return `${p[2]}/${p[1]}/${p[0].substring(2)}`;
+    };
 
     metas.forEach(m => {
         const icon = m.ok ? '✅' : '⚠️';
-        ulMetas.innerHTML += `<li style="margin-bottom:0.5rem;">${icon} ${m.desc}</li>`;
+        let dateStr = "";
+        
+        // Buscar datas se houver registro dessa prática
+        const atendsPratica = g.atendimentos.filter(at => at.boasPraticas.includes(m.code));
+        if (atendsPratica.length > 0) {
+            atendsPratica.sort((a,b) => new Date(a.data) - new Date(b.data));
+            if (['B', 'C', 'D', 'E'].includes(m.code)) {
+                // Práticas contínuas: mostrar a data do último registro
+                dateStr = `<br><small style="color:var(--gray); margin-left: 1.5rem;">Último registro em: ${formatDt(atendsPratica[atendsPratica.length-1].data)}</small>`;
+            } else {
+                // Práticas únicas: mostrar a data da realização
+                dateStr = `<br><small style="color:var(--gray); margin-left: 1.5rem;">Realizado em: ${formatDt(atendsPratica[0].data)}</small>`;
+            }
+        }
+
+        ulMetas.innerHTML += `<li style="margin-bottom:0.8rem; line-height: 1.2;">${icon} ${m.desc}${dateStr}</li>`;
     });
 
     modalFicha.classList.add('active');
