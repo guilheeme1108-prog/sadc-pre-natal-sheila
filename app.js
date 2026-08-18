@@ -143,7 +143,8 @@ async function bootstrapUsers() {
                     email: u.email,
                     profissao: u.prof,
                     equipe: u.eq,
-                    role: u.role
+                    role: u.role,
+                    senha: u.senha
                 });
                 console.log("Criado:", u.nome);
             } catch(e) { console.error("Erro ao criar " + u.nome, e); }
@@ -311,7 +312,7 @@ async function loadAdminUsers() {
                 <td>${u.cpf}</td>
                 <td>${u.profissao}</td>
                 <td>${u.equipe}</td>
-                <td><button onclick="deleteUser('${docSnap.id}', '${u.cpf}')" style="background:var(--vermelho); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Deletar / Refazer</button></td>
+                <td><strong style="color:var(--primary)">${u.senha || 'Oculta'}</strong></td>
             </tr>
         `;
     });
@@ -350,7 +351,8 @@ document.getElementById('btn-admin-add').addEventListener('click', async () => {
             email: authEmail,
             profissao: prof,
             equipe: eq,
-            role: 'user'
+            role: 'user',
+            senha: senha // Gravando senha para o admin poder consultar
         });
         
         alert("Usuário criado com sucesso!");
