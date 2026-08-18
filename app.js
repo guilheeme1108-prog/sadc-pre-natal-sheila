@@ -30,21 +30,44 @@ equipeSelect.addEventListener('change', (e) => {
     }
 });
 
+const btnAdmin = document.getElementById('btn-admin');
+const secAdmin = document.getElementById('sec-admin');
+
 // Navegação
 btnForm.addEventListener('click', () => {
     btnForm.classList.add('active');
     btnDash.classList.remove('active');
+    if(btnAdmin) btnAdmin.classList.remove('active');
+    
     secForm.classList.add('active');
     secDash.classList.remove('active');
+    if(secAdmin) secAdmin.classList.remove('active');
 });
 
 btnDash.addEventListener('click', () => {
     btnDash.classList.add('active');
     btnForm.classList.remove('active');
+    if(btnAdmin) btnAdmin.classList.remove('active');
+    
     secDash.classList.add('active');
     secForm.classList.remove('active');
+    if(secAdmin) secAdmin.classList.remove('active');
     renderDashboard();
 });
+
+if (btnAdmin) {
+    btnAdmin.addEventListener('click', () => {
+        btnAdmin.classList.add('active');
+        btnForm.classList.remove('active');
+        btnDash.classList.remove('active');
+        
+        if(secAdmin) secAdmin.classList.add('active');
+        secForm.classList.remove('active');
+        secDash.classList.remove('active');
+        
+        if(typeof loadAdminUsers === 'function') loadAdminUsers();
+    });
+}
 
 function showToast(message) {
     toast.innerText = message;
@@ -285,8 +308,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     btn.disabled = false;
 });
 
-document.getElementById('btn-logout').addEventListener('click', () => {
-    signOut(auth);
+document.getElementById('btn-logout').addEventListener('click', async () => {
+    await signOut(auth);
+    window.location.reload();
 });
 
 document.getElementById('link-esqueci-senha').addEventListener('click', async (e) => {
