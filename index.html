@@ -41,7 +41,9 @@
                 <div class="form-group" style="text-align: left; margin-top: 1rem; position: relative;">
                     <label for="login-senha">Senha</label>
                     <input type="password" id="login-senha" class="form-control" required placeholder="Sua senha" style="padding-right: 40px;">
-                    <button type="button" id="toggle-senha" style="position: absolute; right: 10px; top: 35px; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--gray);" title="Mostrar senha">👁️</button>
+                    <button type="button" id="toggle-senha" style="position: absolute; right: 10px; top: 38px; background: none; border: none; cursor: pointer; color: var(--gray); display: flex; align-items: center; justify-content: center;" title="Mostrar senha">
+                        <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
                 </div>
                 
                 <div id="login-error" style="color: var(--vermelho); margin-top: 10px; font-size: 0.85rem; display: none;">Login ou senha incorretos.</div>
