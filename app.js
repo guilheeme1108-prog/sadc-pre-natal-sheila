@@ -53,8 +53,8 @@ function showToast(message) {
 }
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, createUserWithEmailAndPassword, updatePassword, updateEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfRWPAiWz56kIAgD65egEWruaqTVdMITM",
@@ -313,6 +313,9 @@ async function loadAdminUsers() {
                 <td>${u.profissao}</td>
                 <td>${u.equipe}</td>
                 <td><strong style="color:var(--primary)">${u.senha || 'Oculta'}</strong></td>
+                <td>
+                    <button onclick="editUser('${docSnap.id}', '${u.nome}', '${u.cpf}', '${u.senha}', '${u.email}')" style="background:var(--warning); color:#000; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Editar Login/Senha</button>
+                </td>
             </tr>
         `;
     });
@@ -323,6 +326,66 @@ window.deleteUser = async function(docId, cpf) {
         await deleteDoc(doc(db, "users", docId));
         alert("Usuário removido do banco. (Nota: ele não poderá mais logar).");
         loadAdminUsers();
+    }
+}
+
+window.editUser = async function(docId, nome, oldCpf, oldSenha, oldEmail) {
+    const newCpf = prompt(`Editando o Login (CPF) de ${nome}:`, oldCpf);
+    if (!newCpf) return; // Cancelado
+    
+    const newSenha = prompt(`Editando a Senha de ${nome}:`, oldSenha || "");
+    if (!newSenha) return; // Cancelado
+    
+    if (newCpf === oldCpf && newSenha === oldSenha) {
+        return; // Nada mudou
+    }
+
+    try {
+        // Log in to Secondary Auth to edit the user's credential
+        await signInWithEmailAndPassword(secondaryAuth, oldEmail, oldSenha);
+        
+        let newEmail = oldEmail;
+        
+        // Update CPF (Email)
+        if (newCpf !== oldCpf) {
+            newEmail = `${newCpf}@sadc.com`;
+            await updateEmail(secondaryAuth.currentUser, newEmail);
+        }
+        
+        // Update Password
+        if (newSenha !== oldSenha) {
+            await updatePassword(secondaryAuth.currentUser, newSenha);
+        }
+        
+        await signOut(secondaryAuth);
+        
+        // Update Firestore
+        const oldDocRef = doc(db, "users", docId);
+        const oldDocSnap = await getDocs(collection(db, "users"));
+        let userData = null;
+        oldDocSnap.forEach(d => { if(d.id === docId) userData = d.data(); });
+        
+        if (userData) {
+            userData.cpf = newCpf;
+            userData.senha = newSenha;
+            userData.email = newEmail;
+            
+            if (newCpf !== oldCpf) {
+                // Creates new doc and deletes old one
+                await setDoc(doc(db, "users", newCpf), userData);
+                await deleteDoc(oldDocRef);
+            } else {
+                // Just updates current doc
+                await updateDoc(oldDocRef, { cpf: newCpf, senha: newSenha, email: newEmail });
+            }
+        }
+        
+        alert("Login/Senha alterados com sucesso!");
+        loadAdminUsers();
+        
+    } catch(e) {
+        alert("Erro ao alterar usuário: " + e.message);
+        await signOut(secondaryAuth);
     }
 }
 
