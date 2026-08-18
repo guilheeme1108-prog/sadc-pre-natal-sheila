@@ -234,8 +234,17 @@ onAuthStateChanged(auth, async (user) => {
                 renderDashboard(); // Pre-load dashboard behind the scenes
             } else {
                 console.error("Usuário autenticado mas sem perfil no banco.");
+                
+                let dbContents = "";
+                querySnapshot.forEach(d => { dbContents += d.id + " -> " + d.data().email + "\n"; });
+                
                 signOut(auth);
-                alert("Login efetuado, mas seu perfil não foi encontrado no banco de dados. Contate o suporte.");
+                alert("ERRO DE DIAGNÓSTICO DE LOGIN:\n\n" +
+                      "Seu Auth Email: " + user.email + "\n" +
+                      "Seu CPF esperado: " + userCpf + "\n\n" +
+                      "Contas que o sistema achou no Banco de Dados:\n" +
+                      (dbContents || "[O BANCO ESTÁ VAZIO]") + "\n\n" +
+                      "Tire um print dessa tela e mande para o desenvolvedor.");
             }
         } catch(e) {
             console.error(e);
