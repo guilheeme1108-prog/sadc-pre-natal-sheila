@@ -77,7 +77,7 @@ function showToast(message) {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, createUserWithEmailAndPassword, updatePassword, updateEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, createUserWithEmailAndPassword, updatePassword, updateEmail, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfRWPAiWz56kIAgD65egEWruaqTVdMITM",
@@ -298,6 +298,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     if (cpf === '07116738533') authEmail = 'guilheeme1108@gmail.com'; // Admin map
 
     try {
+        await setPersistence(auth, browserSessionPersistence);
         await signInWithEmailAndPassword(auth, authEmail, senha);
     } catch (error) {
         err.style.display = 'block';
