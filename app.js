@@ -156,11 +156,14 @@ async function bootstrapUsers() {
                 console.log("Perfil criado no banco para:", u.nome);
             } catch(e) {
                 console.error("Erro ao gravar perfil no banco para " + u.nome, e);
+                alert("ERRO DE CONEXÃO (Firestore): Verifique se você criou o banco 'Firestore Database' no painel do Firebase e colocou as regras em Modo de Teste. Erro: " + e.code);
             }
         }
     }
 }
-bootstrapUsers();
+bootstrapUsers().catch(e => {
+    alert("ERRO GERAL DE CONEXÃO: " + e.message + "\n\nVerifique se ativou o Firebase Authentication (E-mail/Senha) e o Firestore Database no Console do Firebase.");
+});
 
 // -----------------------------------------
 // VALIDAÇÃO DE CPF/CNS
@@ -202,33 +205,40 @@ const appNavbar = document.getElementById('app-navbar');
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        // Fetch user profile from Firestore
-        const querySnapshot = await getDocs(collection(db, "users"));
-        let profile = null;
-        querySnapshot.forEach(doc => {
-            if (doc.data().email === user.email) {
-                profile = doc.data();
+        try {
+            // Fetch user profile from Firestore
+            const querySnapshot = await getDocs(collection(db, "users"));
+            let profile = null;
+            querySnapshot.forEach(doc => {
+                if (doc.data().email === user.email) {
+                    profile = doc.data();
+                }
+            });
+            
+            if (profile) {
+                window.currentUserProfile = profile;
+                document.getElementById('nav-user-name').innerText = profile.nome;
+                document.getElementById('nav-user-role').innerText = `${profile.profissao} | Equipe ${profile.equipe}`;
+                
+                if (profile.role === 'admin') {
+                    document.getElementById('nav-user-role').innerText = `Administrador`;
+                    document.getElementById('btn-admin').style.display = 'block';
+                }
+                
+                loginContainer.style.display = 'none';
+                appNavbar.style.display = 'flex';
+                appContainer.style.display = 'block';
+                
+                renderDashboard(); // Pre-load dashboard behind the scenes
+            } else {
+                console.error("Usuário autenticado mas sem perfil no banco.");
+                signOut(auth);
+                alert("Login efetuado, mas seu perfil não foi encontrado no banco de dados. Contate o suporte.");
             }
-        });
-        
-        if (profile) {
-            window.currentUserProfile = profile;
-            document.getElementById('nav-user-name').innerText = profile.nome;
-            document.getElementById('nav-user-role').innerText = `${profile.profissao} | Equipe ${profile.equipe}`;
-            
-            if (profile.role === 'admin') {
-                document.getElementById('nav-user-role').innerText = `Administrador`;
-                document.getElementById('btn-admin').style.display = 'block';
-            }
-            
-            loginContainer.style.display = 'none';
-            appNavbar.style.display = 'flex';
-            appContainer.style.display = 'block';
-            
-            renderDashboard(); // Pre-load dashboard behind the scenes
-        } else {
-            console.error("Usuário autenticado mas sem perfil no banco.");
+        } catch(e) {
+            console.error(e);
             signOut(auth);
+            alert("Erro de Permissão no Banco de Dados: " + e.message + "\n\nVá no Firebase > Firestore Database > Rules e altere 'allow read, write: if false;' para 'if true;'");
         }
     } else {
         window.currentUserProfile = null;
