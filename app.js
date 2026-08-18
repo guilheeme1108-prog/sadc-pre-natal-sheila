@@ -282,6 +282,20 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
+const toggleSenha = document.getElementById('toggle-senha');
+if (toggleSenha) {
+    toggleSenha.addEventListener('click', () => {
+        const inputSenha = document.getElementById('login-senha');
+        if (inputSenha.type === 'password') {
+            inputSenha.type = 'text';
+            toggleSenha.innerText = '🙈';
+        } else {
+            inputSenha.type = 'password';
+            toggleSenha.innerText = '👁️';
+        }
+    });
+}
+
 document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const cpf = document.getElementById('login-cpf').value;
