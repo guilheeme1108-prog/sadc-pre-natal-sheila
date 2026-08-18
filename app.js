@@ -136,7 +136,14 @@ async function bootstrapUsers() {
         
         for (const u of users) {
             try {
+                // Tenta criar na Autenticação (pode falhar se já existir, e tudo bem)
                 await createUserWithEmailAndPassword(secondaryAuth, u.email, u.senha);
+            } catch(e) { 
+                console.log("Auth já existia ou erro ao criar Auth para " + u.nome, e.code); 
+            }
+            
+            try {
+                // Grava no Firestore independentemente
                 await setDoc(doc(db, "users", u.cpf), {
                     nome: u.nome,
                     cpf: u.cpf,
@@ -146,8 +153,10 @@ async function bootstrapUsers() {
                     role: u.role,
                     senha: u.senha
                 });
-                console.log("Criado:", u.nome);
-            } catch(e) { console.error("Erro ao criar " + u.nome, e); }
+                console.log("Perfil criado no banco para:", u.nome);
+            } catch(e) {
+                console.error("Erro ao gravar perfil no banco para " + u.nome, e);
+            }
         }
     }
 }
