@@ -120,21 +120,21 @@ async function deleteGestanteDB(id) {
 // BOOTSTRAP USERS
 // -----------------------------------------
 async function bootstrapUsers() {
-    const adminRef = doc(db, "users", "07116738533");
     const adminSnap = await getDocs(collection(db, "users"));
-    let adminExists = false;
-    adminSnap.forEach(d => { if (d.id === "07116738533") adminExists = true; });
+    console.log("Checando/Reparando contas padrão...");
     
-    if (!adminExists) {
-        console.log("Realizando setup inicial de usuários...");
-        const users = [
-            { nome: "Guilherme (Admin)", cpf: "07116738533", email: "guilheeme1108@gmail.com", senha: "@Guiaug11", prof: "Administrador", eq: "Todas", role: "admin" },
-            { nome: "Sheila Cristina de Souza Pinheiro", cpf: "92250149534", email: "92250149534@sadc.com", senha: "sheila922", prof: "Enfermeira", eq: "60", role: "user" },
-            { nome: "Rejane Carvalho Gil Freire", cpf: "98097750597", email: "98097750597@sadc.com", senha: "rejane980", prof: "Enfermeira", eq: "61", role: "user" },
-            { nome: "Joao Victor Vieira Monteiro", cpf: "07936402454", email: "07936402454@sadc.com", senha: "joao079", prof: "Médico", eq: "60", role: "user" }
-        ];
+    const users = [
+        { nome: "Guilherme (Admin)", cpf: "07116738533", email: "guilheeme1108@gmail.com", senha: "@Guiaug11", prof: "Administrador", eq: "Todas", role: "admin" },
+        { nome: "Sheila Cristina de Souza Pinheiro", cpf: "92250149534", email: "92250149534@sadc.com", senha: "sheila922", prof: "Enfermeira", eq: "60", role: "user" },
+        { nome: "Rejane Carvalho Gil Freire", cpf: "98097750597", email: "98097750597@sadc.com", senha: "rejane980", prof: "Enfermeira", eq: "61", role: "user" },
+        { nome: "Joao Victor Vieira Monteiro", cpf: "07936402454", email: "07936402454@sadc.com", senha: "joao079", prof: "Médico", eq: "60", role: "user" }
+    ];
+    
+    for (const u of users) {
+        let exists = false;
+        adminSnap.forEach(d => { if (d.id === u.cpf) exists = true; });
         
-        for (const u of users) {
+        if (!exists) {
             try {
                 // Tenta criar na Autenticação (pode falhar se já existir, e tudo bem)
                 await createUserWithEmailAndPassword(secondaryAuth, u.email, u.senha);
@@ -206,11 +206,13 @@ const appNavbar = document.getElementById('app-navbar');
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         try {
-            // Fetch user profile from Firestore
+            let userCpf = user.email.split('@')[0];
+            if (user.email === 'guilheeme1108@gmail.com') userCpf = '07116738533';
+
             const querySnapshot = await getDocs(collection(db, "users"));
             let profile = null;
             querySnapshot.forEach(doc => {
-                if (doc.data().email === user.email) {
+                if (doc.id === userCpf) {
                     profile = doc.data();
                 }
             });
