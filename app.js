@@ -54,6 +54,7 @@ function showToast(message) {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfRWPAiWz56kIAgD65egEWruaqTVdMITM",
@@ -66,6 +67,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Secondary app for admin user creation
+const secondaryApp = initializeApp(firebaseConfig, "Secondary");
+const secondaryAuth = getAuth(secondaryApp);
+
+// Global user state
+window.currentUserProfile = null;
 
 // -----------------------------------------
 // DATA LAYER (Firebase)
@@ -74,10 +83,16 @@ const db = getFirestore(app);
 async function getGestantes() {
     try {
         const querySnapshot = await getDocs(collection(db, "gestantes"));
-        const gestantes = [];
+        let gestantes = [];
         querySnapshot.forEach((doc) => {
             gestantes.push(doc.data());
         });
+        
+        // RBAC Filtering: If not admin, only see own team
+        if (window.currentUserProfile && window.currentUserProfile.role !== 'admin') {
+            gestantes = gestantes.filter(g => g.equipe === window.currentUserProfile.equipe);
+        }
+        
         return gestantes;
     } catch (e) {
         console.error("Erro ao buscar dados do Firebase: ", e);
@@ -100,6 +115,42 @@ async function deleteGestanteDB(id) {
         console.error("Erro ao deletar no Firebase: ", e);
     }
 }
+
+// -----------------------------------------
+// BOOTSTRAP USERS
+// -----------------------------------------
+async function bootstrapUsers() {
+    const adminRef = doc(db, "users", "07116738533");
+    const adminSnap = await getDocs(collection(db, "users"));
+    let adminExists = false;
+    adminSnap.forEach(d => { if (d.id === "07116738533") adminExists = true; });
+    
+    if (!adminExists) {
+        console.log("Realizando setup inicial de usuários...");
+        const users = [
+            { nome: "Guilherme (Admin)", cpf: "07116738533", email: "guilheeme1108@gmail.com", senha: "@Guiaug11", prof: "Administrador", eq: "Todas", role: "admin" },
+            { nome: "Sheila Cristina de Souza Pinheiro", cpf: "92250149534", email: "92250149534@sadc.com", senha: "sheila922", prof: "Enfermeira", eq: "60", role: "user" },
+            { nome: "Rejane Carvalho Gil Freire", cpf: "98097750597", email: "98097750597@sadc.com", senha: "rejane980", prof: "Enfermeira", eq: "61", role: "user" },
+            { nome: "Joao Victor Vieira Monteiro", cpf: "07936402454", email: "07936402454@sadc.com", senha: "joao079", prof: "Médico", eq: "60", role: "user" }
+        ];
+        
+        for (const u of users) {
+            try {
+                await createUserWithEmailAndPassword(secondaryAuth, u.email, u.senha);
+                await setDoc(doc(db, "users", u.cpf), {
+                    nome: u.nome,
+                    cpf: u.cpf,
+                    email: u.email,
+                    profissao: u.prof,
+                    equipe: u.eq,
+                    role: u.role
+                });
+                console.log("Criado:", u.nome);
+            } catch(e) { console.error("Erro ao criar " + u.nome, e); }
+        }
+    }
+}
+bootstrapUsers();
 
 // -----------------------------------------
 // VALIDAÇÃO DE CPF/CNS
@@ -130,6 +181,191 @@ function validarDocumento(doc) {
     
     return false; // nem 11 nem 15
 }
+
+// -----------------------------------------
+// AUTHENTICATION & LOGIN
+// -----------------------------------------
+
+const loginContainer = document.getElementById('login-container');
+const appContainer = document.getElementById('app-container');
+const appNavbar = document.getElementById('app-navbar');
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        // Fetch user profile from Firestore
+        const querySnapshot = await getDocs(collection(db, "users"));
+        let profile = null;
+        querySnapshot.forEach(doc => {
+            if (doc.data().email === user.email) {
+                profile = doc.data();
+            }
+        });
+        
+        if (profile) {
+            window.currentUserProfile = profile;
+            document.getElementById('nav-user-name').innerText = profile.nome;
+            document.getElementById('nav-user-role').innerText = `${profile.profissao} | Equipe ${profile.equipe}`;
+            
+            if (profile.role === 'admin') {
+                document.getElementById('nav-user-role').innerText = `Administrador`;
+                document.getElementById('btn-admin').style.display = 'block';
+            }
+            
+            loginContainer.style.display = 'none';
+            appNavbar.style.display = 'flex';
+            appContainer.style.display = 'block';
+            
+            renderDashboard(); // Pre-load dashboard behind the scenes
+        } else {
+            console.error("Usuário autenticado mas sem perfil no banco.");
+            signOut(auth);
+        }
+    } else {
+        window.currentUserProfile = null;
+        loginContainer.style.display = 'flex';
+        appNavbar.style.display = 'none';
+        appContainer.style.display = 'none';
+    }
+});
+
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const cpf = document.getElementById('login-cpf').value;
+    const senha = document.getElementById('login-senha').value;
+    const btn = document.getElementById('btn-login-submit');
+    const err = document.getElementById('login-error');
+    
+    err.style.display = 'none';
+    btn.innerText = "Autenticando...";
+    btn.disabled = true;
+    
+    // Map CPF to Auth Email
+    let authEmail = `${cpf}@sadc.com`;
+    if (cpf === '07116738533') authEmail = 'guilheeme1108@gmail.com'; // Admin map
+
+    try {
+        await signInWithEmailAndPassword(auth, authEmail, senha);
+    } catch (error) {
+        err.style.display = 'block';
+        err.innerText = "Login ou senha incorretos.";
+    }
+    
+    btn.innerText = "Entrar no Sistema";
+    btn.disabled = false;
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => {
+    signOut(auth);
+});
+
+document.getElementById('link-esqueci-senha').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const cpf = document.getElementById('login-cpf').value;
+    const err = document.getElementById('login-error');
+    if (!cpf) {
+        err.style.display = 'block';
+        err.innerText = "Digite seu CPF primeiro para redefinir a senha.";
+        return;
+    }
+    
+    let authEmail = `${cpf}@sadc.com`;
+    if (cpf === '07116738533') {
+        authEmail = 'guilheeme1108@gmail.com';
+        try {
+            await sendPasswordResetEmail(auth, authEmail);
+            alert("Email de redefinição enviado para guilheeme1108@gmail.com!");
+        } catch (error) {
+            alert("Erro ao enviar email de redefinição.");
+        }
+    } else {
+        alert("Para contas padrão, solicite a alteração de senha ao Administrador.");
+    }
+});
+
+// Admin Navigation
+document.getElementById('btn-admin').addEventListener('click', () => {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('sec-admin').classList.add('active');
+    document.getElementById('btn-admin').classList.add('active');
+    loadAdminUsers();
+});
+
+// -----------------------------------------
+// ADMIN PANEL LOGIC
+// -----------------------------------------
+
+async function loadAdminUsers() {
+    const tbody = document.getElementById('admin-users-tbody');
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Carregando usuários...</td></tr>';
+    
+    const querySnapshot = await getDocs(collection(db, "users"));
+    tbody.innerHTML = '';
+    querySnapshot.forEach(docSnap => {
+        const u = docSnap.data();
+        if (u.role === 'admin') return; // Hide admin from list
+        
+        tbody.innerHTML += `
+            <tr>
+                <td>${u.nome}</td>
+                <td>${u.cpf}</td>
+                <td>${u.profissao}</td>
+                <td>${u.equipe}</td>
+                <td><button onclick="deleteUser('${docSnap.id}', '${u.cpf}')" style="background:var(--vermelho); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Deletar / Refazer</button></td>
+            </tr>
+        `;
+    });
+}
+
+window.deleteUser = async function(docId, cpf) {
+    if(confirm("Tem certeza que deseja apagar o perfil deste usuário? O login não funcionará mais.")) {
+        await deleteDoc(doc(db, "users", docId));
+        alert("Usuário removido do banco. (Nota: ele não poderá mais logar).");
+        loadAdminUsers();
+    }
+}
+
+document.getElementById('btn-admin-add').addEventListener('click', async () => {
+    const nome = document.getElementById('admin-nome').value;
+    const cpf = document.getElementById('admin-cpf').value;
+    const senha = document.getElementById('admin-senha').value;
+    const prof = document.getElementById('admin-prof').value;
+    const eq = document.getElementById('admin-equipe').value;
+    
+    if(!nome || !cpf || !senha || !eq) return alert("Preencha todos os campos.");
+    
+    const btn = document.getElementById('btn-admin-add');
+    btn.innerText = "Cadastrando...";
+    btn.disabled = true;
+    
+    const authEmail = `${cpf}@sadc.com`;
+    try {
+        // Creates user in Auth without logging admin out!
+        await createUserWithEmailAndPassword(secondaryAuth, authEmail, senha);
+        
+        // Save to Firestore
+        await setDoc(doc(db, "users", cpf), {
+            nome: nome,
+            cpf: cpf,
+            email: authEmail,
+            profissao: prof,
+            equipe: eq,
+            role: 'user'
+        });
+        
+        alert("Usuário criado com sucesso!");
+        document.getElementById('admin-nome').value = '';
+        document.getElementById('admin-cpf').value = '';
+        document.getElementById('admin-senha').value = '';
+        document.getElementById('admin-equipe').value = '';
+        loadAdminUsers();
+    } catch(e) {
+        alert("Erro ao criar usuário: " + e.message);
+    }
+    
+    btn.innerText = "Cadastrar Usuário";
+    btn.disabled = false;
+});
 
 // -----------------------------------------
 // FORMULÁRIO (Camada 1)
@@ -163,8 +399,8 @@ sadcForm.addEventListener('submit', async (e) => {
     const dataNascimento = document.getElementById('dataNascimento').value;
     const dumInput = document.getElementById('dum').value;
     const dataAtend = document.getElementById('dataAtendimento').value;
-    const profissional = document.getElementById('profissional').value;
-    const tipoEquipe = document.getElementById('equipe').value;
+    const profissional = window.currentUserProfile.profissao;
+    const equipe = window.currentUserProfile.equipe;
     const pertenceEquipe = document.getElementById('pertenceEquipe').value;
     const observacoes = document.getElementById('observacoes').value;
     const acsInput = document.getElementById('acs').value;
@@ -187,8 +423,8 @@ sadcForm.addEventListener('submit', async (e) => {
             cpf: cpfInput,
             dataNascimento: dataNascimento,
             dum: dumInput,
-            equipe: "INE 000000 - " + tipoEquipe,
-            tipoEquipe: tipoEquipe,
+            equipe: equipe,
+            equipeCadastrou: equipe,
             pertenceEquipe: pertenceEquipe,
             acs: acsInput,
             classificacaoRisco: classificacaoRiscoInput,
@@ -199,7 +435,7 @@ sadcForm.addEventListener('submit', async (e) => {
         // Atualizar DUM caso tenha mudado
         gestante.dum = dumInput;
         gestante.dataNascimento = dataNascimento || gestante.dataNascimento;
-        gestante.tipoEquipe = tipoEquipe;
+        gestante.equipe = equipe; // Atualiza a equipe para quem está editando agora
         gestante.pertenceEquipe = pertenceEquipe;
         gestante.classificacaoRisco = classificacaoRiscoInput;
         if (acsInput) gestante.acs = acsInput;
@@ -251,7 +487,6 @@ document.getElementById('cpf').addEventListener('blur', async (e) => {
                 }
             }
 
-            document.getElementById('equipe').value = gestante.tipoEquipe || "eSF - Tipo 70";
             if (gestante.pertenceEquipe) document.getElementById('pertenceEquipe').value = gestante.pertenceEquipe;
             document.getElementById('acs').value = gestante.acs || "";
             document.getElementById('classificacaoRisco').value = gestante.classificacaoRisco || "Risco Habitual";

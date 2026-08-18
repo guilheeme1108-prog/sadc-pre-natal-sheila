@@ -9,17 +9,52 @@
 </head>
 <body>
 
-    <nav class="navbar">
+    <nav class="navbar" id="app-navbar" style="display: none;">
         <div class="logo">
             🩺 SADC Pré-Natal
         </div>
         <div class="nav-links">
             <button id="btn-form" class="active">Formulário de Coleta</button>
             <button id="btn-dash">Dashboard Semafórico</button>
+            <button id="btn-admin" style="display: none; background: var(--warning); color: #000;">Painel Admin</button>
+        </div>
+        <div class="user-profile" id="user-profile-info" style="display: flex; align-items: center; gap: 15px; color: white; margin-left: auto;">
+            <div style="text-align: right; line-height: 1.2;">
+                <div id="nav-user-name" style="font-weight: 600; font-size: 0.95rem;">Carregando...</div>
+                <div id="nav-user-role" style="font-size: 0.75rem; opacity: 0.9;">-</div>
+            </div>
+            <button id="btn-logout" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: 600;">Sair</button>
         </div>
     </nav>
 
-    <div class="container">
+    <!-- TELA DE LOGIN -->
+    <div id="login-container" class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        <div class="glass-card" style="max-width: 400px; width: 100%; text-align: center; padding: 2.5rem;">
+            <h2 style="margin-bottom: 0.5rem;">🩺 SADC Pré-Natal</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem; font-size: 0.9rem;">Faça login para acessar o sistema.</p>
+            
+            <form id="login-form">
+                <div class="form-group" style="text-align: left;">
+                    <label for="login-cpf">CPF do Usuário</label>
+                    <input type="text" id="login-cpf" class="form-control" required placeholder="Apenas números">
+                </div>
+                <div class="form-group" style="text-align: left; margin-top: 1rem;">
+                    <label for="login-senha">Senha</label>
+                    <input type="password" id="login-senha" class="form-control" required placeholder="Sua senha">
+                </div>
+                
+                <div id="login-error" style="color: var(--vermelho); margin-top: 10px; font-size: 0.85rem; display: none;">Login ou senha incorretos.</div>
+                
+                <button type="submit" class="btn-submit" id="btn-login-submit" style="margin-top: 1.5rem;">Entrar no Sistema</button>
+                
+                <div style="margin-top: 1.5rem;">
+                    <a href="#" id="link-esqueci-senha" style="color: var(--primary); font-size: 0.85rem; text-decoration: none;">Esqueci minha senha</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="app-container" style="display: none;">
         
         <!-- FORMULÁRIO SECTION -->
         <section id="sec-form" class="section active">
@@ -56,19 +91,9 @@
                             <label for="dataAtendimento">Data do Atendimento *</label>
                             <input type="date" id="dataAtendimento" class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label for="profissional">Profissional (CBO)</label>
-                            <select id="profissional" class="form-control">
-                                <option value="Enfermeiro(a) - 2235">Enfermeiro(a) - 2235</option>
-                                <option value="Médico(a) - 2251/2252/2231">Médico(a) - 2251/2252/2231</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="equipe">Tipo de Equipe *</label>
-                            <select id="equipe" class="form-control">
-                                <option value="eSF - Tipo 70">Saúde da Família (eSF - Tipo 70)</option>
-                                <option value="eAP - Tipo 76">Atenção Primária (eAP - Tipo 76)</option>
-                            </select>
+                        <div class="form-group" style="display: none;">
+                            <input type="hidden" id="profissional">
+                            <input type="hidden" id="equipe">
                         </div>
                         <div class="form-group">
                             <label for="pertenceEquipe">Vínculo com a Unidade *</label>
@@ -248,9 +273,63 @@
             </div>
         </section>
 
+        <!-- ADMIN SECTION -->
+        <section id="sec-admin" class="section" style="display: none;">
+            <div class="glass-card">
+                <h2>Painel Administrador</h2>
+                <p style="color: var(--gray); margin-bottom: 2rem;">Gerencie os usuários do sistema. Apenas você tem acesso a esta tela.</p>
+
+                <div class="form-grid" style="align-items: end;">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="admin-nome" class="form-control" placeholder="Ex: Maria Silva">
+                    </div>
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" id="admin-cpf" class="form-control" placeholder="Apenas números">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha Inicial</label>
+                        <input type="text" id="admin-senha" class="form-control" placeholder="Senha do usuário">
+                    </div>
+                    <div class="form-group">
+                        <label>Profissão</label>
+                        <select id="admin-prof" class="form-control">
+                            <option value="Enfermeira">Enfermeiro(a)</option>
+                            <option value="Médico">Médico(a)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Equipe</label>
+                        <input type="text" id="admin-equipe" class="form-control" placeholder="Ex: 60">
+                    </div>
+                    <div class="form-group">
+                        <button id="btn-admin-add" class="btn-submit" style="margin-top: 0;">Cadastrar Usuário</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; overflow-x: auto;">
+                    <table class="dash-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Profissão</th>
+                                <th>Equipe</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-users-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
     </div>
 
-    <!-- Modal Ficha da Gestante -->
+    <!-- MODAL FICHA DA GESTANTE -->
     <div class="modal-overlay" id="modal-ficha">
         <div class="modal-content">
             <button class="close-btn" onclick="fecharModal()">×</button>
