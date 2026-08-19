@@ -126,10 +126,10 @@ const C3Engine = {
         if (eAP76) maxPontos = 82; // E (9) e J (9) não contam
 
         if (acumulado.captacaoPrecoce) pontos += 10;
-        if (acumulado.consultas >= 7) pontos += 9;
-        if (acumulado.pa >= 7) pontos += 9;
-        if (acumulado.antropometria >= 7) pontos += 9;
-        if (!eAP76 && acumulado.visitasACS >= 3) pontos += 9;
+        pontos += Math.min(9, (acumulado.consultas / 7) * 9);
+        pontos += Math.min(9, (acumulado.pa / 7) * 9);
+        pontos += Math.min(9, (acumulado.antropometria / 7) * 9);
+        if (!eAP76) pontos += Math.min(9, (acumulado.visitasACS / 3) * 9);
         if (acumulado.dTpa) pontos += 9;
         if (acumulado.exames1Tri) pontos += 9;
         if (acumulado.exames3Tri) pontos += 9;
