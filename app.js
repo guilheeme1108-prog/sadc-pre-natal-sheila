@@ -541,6 +541,7 @@ sadcForm.addEventListener('submit', async (e) => {
     const observacoes = document.getElementById('observacoes').value;
     const acsInput = document.getElementById('acs').value;
     const classificacaoRiscoInput = document.getElementById('classificacaoRisco').value;
+    const igPrimeiraConsultaInput = document.getElementById('igPrimeiraConsulta') ? document.getElementById('igPrimeiraConsulta').value : '';
 
     // Coletar checkboxes
     const checkboxes = document.querySelectorAll('.custom-checkbox input:checked');
@@ -564,6 +565,7 @@ sadcForm.addEventListener('submit', async (e) => {
             pertenceEquipe: pertenceEquipe,
             acs: acsInput,
             classificacaoRisco: classificacaoRiscoInput,
+            igPrimeiraConsulta: igPrimeiraConsultaInput,
             atendimentos: []
         };
         gestantes.push(gestante);
@@ -575,6 +577,7 @@ sadcForm.addEventListener('submit', async (e) => {
         gestante.pertenceEquipe = pertenceEquipe;
         gestante.classificacaoRisco = classificacaoRiscoInput;
         if (acsInput) gestante.acs = acsInput;
+        if (igPrimeiraConsultaInput) gestante.igPrimeiraConsulta = igPrimeiraConsultaInput;
     }
 
     // Adicionar novo atendimento
@@ -773,6 +776,12 @@ function abrirFicha(g) {
         document.getElementById('f-dpp').innerText = `DPP: ${dp[2]}/${dp[1]}/${dp[0]}`;
     } else {
         document.getElementById('f-dpp').innerText = `DPP: Não calculada`;
+    }
+
+    if (g.igPrimeiraConsulta) {
+        document.getElementById('f-ig-prim').innerText = `IG 1ª Cons.: ${g.igPrimeiraConsulta} Sem.`;
+    } else {
+        document.getElementById('f-ig-prim').innerText = `IG 1ª Cons.: -`;
     }
 
     document.getElementById('f-equipe').innerText = g.equipe;
