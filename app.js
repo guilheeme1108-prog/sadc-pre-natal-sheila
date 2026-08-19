@@ -740,11 +740,8 @@ async function renderDashboard() {
         }
     });
 
-    const mediaEquipe = stats.total_equipe > 0 ? Math.round(stats.somaNotasEquipe / stats.total_equipe) : 0;
-    
     document.getElementById('dash-total-equipe').innerText = stats.total_equipe;
     document.getElementById('dash-total-extra').innerText = stats.total_extra;
-    document.getElementById('dash-media').innerText = mediaEquipe + "%";
     document.getElementById('dash-verde').innerText = stats.verde;
     document.getElementById('dash-amarelo').innerText = stats.amarelo;
     document.getElementById('dash-vermelho').innerText = stats.vermelho;
